@@ -28,7 +28,7 @@
 <meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-17T09:37:41.365Z">
-<meta property="article:modified_time" content="2020-06-17T09:52:58.595Z">
+<meta property="article:modified_time" content="2020-06-17T11:02:20.963Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -156,7 +156,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-06-17 17:37:41 / Modified: 17:52:58" itemprop="dateCreated datePublished" datetime="2020-06-17T17:37:41+08:00">2020-06-17</time>
+              <time title="Created: 2020-06-17 17:37:41 / Modified: 19:02:20" itemprop="dateCreated datePublished" datetime="2020-06-17T17:37:41+08:00">2020-06-17</time>
             </span>
 
           
@@ -173,6 +173,8 @@
         <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
+<div href="">ys</div>
+
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
@@ -183,34 +185,7 @@
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-<h1 id="压缩感知"><a href="#压缩感知" class="headerlink" title="压缩感知"></a>压缩感知</h1><ul>
-<li>内容来自于知乎学习<blockquote>
-<p>这个作者写的很好，之前和他学习过小波变换。<br>原文链接<a href="https://zhuanlan.zhihu.com/p/22445302" target="_blank" rel="noopener">形象易懂讲解算法II——压缩感知</a></p>
-</blockquote>
-</li>
-<li><em>突破了</em>信号处理领域的金科玉律——<em>奈奎斯特采样定律</em>。即，在信号采样的过程中，用很少的采样点，实现了和全采样一样的效果。</li>
-</ul>
-<h2 id="前提条件1：稀疏性（sparsity）"><a href="#前提条件1：稀疏性（sparsity）" class="headerlink" title="前提条件1：稀疏性（sparsity）"></a>前提条件1：稀疏性（sparsity）</h2><ul>
-<li><p>若信号在某个域中只有少量非零值，那么它在该域稀疏，该域也被称为信号的稀疏域。</p>
-</li>
-<li><p>然而通常信号在变换域中不会呈现完全的稀疏性。其实只要它近似满足稀疏性，即大部分值趋于零，只有少量大的非零值，就可以认为它是可压缩信号，可以对它进行CS亚采样。</p>
-</li>
-<li><p>对于之前讲的例子，如果它在频域中不稀疏，我们可以做DWT、DCT等，找到它的稀疏变换。</p>
-<blockquote>
-<p>DWT （Discrete Wavelet Transformation） 离散小波变换<br>DCT （Discrete Cosine Transform） 离散余弦变换\</p>
-</blockquote>
-<blockquote>
-<p>稀疏性普遍用作图像压缩，eg.JPEG<br>将图像的数据转到稀疏的域，留下主成分，将其余置零。</p>
-</blockquote>
-<blockquote>
-<p>图像压缩 与 压缩感知的区别：</p>
-<blockquote>
-<p>图像压缩：全采样，再压缩。<br>压缩感知：亚采样，用算法消除亚采样的伪影。<br>压缩感知在采样时候，完成的压缩。</p>
-</blockquote>
-</blockquote>
-</li>
-</ul>
-<h2 id="前提条件2：不相关性（incoherence）"><a href="#前提条件2：不相关性（incoherence）" class="headerlink" title="前提条件2：不相关性（incoherence）"></a>前提条件2：不相关性（incoherence）</h2>
+
     </div>
 
     
@@ -223,6 +198,13 @@
 
 
         
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/17/compressedSensing/" rel="next" title="compressedSensing">
+      compressedSensing <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -280,7 +262,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#压缩感知"><span class="nav-number"></span> <span class="nav-text">压缩感知</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提条件1：稀疏性（sparsity）"><span class="nav-number">1.</span> <span class="nav-text">前提条件1：稀疏性（sparsity）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前提条件2：不相关性（incoherence）"><span class="nav-number">2.</span> <span class="nav-text">前提条件2：不相关性（incoherence）</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -293,7 +275,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
