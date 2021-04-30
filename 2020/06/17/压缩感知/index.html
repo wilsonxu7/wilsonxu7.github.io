@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<!--Description-->
+
+
+
+    <meta name="description" content="压缩感知
+内容来自于知乎学习
+这个作者写的很好，之前和他学习过小波变换。原文链接形象易懂讲解算法II——压缩感知
+
+
+代码的参考来源来自Github-harrydragon
+突破了信号处理领域的金科玉律——奈奎斯特采样定律。即，在信号采样的过程中，用很少的采样点，实现了和全采样一样的效果。
+
+前提条"/>
+
+
+<!--Author-->
+
+    <meta name="author" content="Wilson Xu"/>
+
+
+<!--Open Graph Title-->
+
+    <meta property="og:title" content="压缩感知"/>
+
+
+<!--Open Graph Description-->
+
+    <meta property="og:description" content="压缩感知
+内容来自于知乎学习
+这个作者写的很好，之前和他学习过小波变换。原文链接形象易懂讲解算法II——压缩感知
+
+
+代码的参考来源来自Github-harrydragon
+突破了信号处理领域的金科玉律——奈奎斯特采样定律。即，在信号采样的过程中，用很少的采样点，实现了和全采样一样的效果。
+
+前提条"/>
+
+
+<!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Wilson&#39;s Blog"/>
+
+<!--Type page-->
+
+    <meta property="og:type" content="article"/>
+
+
+<!--Page Cover-->
+
+
+    <meta property="og:image" content="http://example.com/img/home-bg.jpg"/>
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+
+
+
+
+    <meta name="twitter:image" content="http://example.com/img/home-bg.jpg"/>
+
+
+<!-- Title -->
+
+<title>压缩感知 - Wilson&#39;s Blog</title>
+
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+
+<!-- Custom CSS -->
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css" />
+<link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- Gallery -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/featherlight@1.4.0/src/featherlight.css" integrity="sha256-30DV/STftlyQ6v8yaOWlabammvCYtRJERLj/m0b3zno=" crossorigin="anonymous">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/css/lightgallery.min.css">
+
+<!-- favicon -->
+
+<link rel="icon" href="/img/favicon.png"/>
+
+
+
+    <!-- Google Analytics -->
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<!-- Head tag -->
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top bg-transparent position-absolute w-100 p-0" id="nav">
+    <div class="container pl-0 pr-0">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <a class="navbar-brand text-white p-1 pl-3" href="/">Wilson's Blog</a>
+        </div>
+        <div class="navbar-nav float-right">
+            <button class="btn btn-link search-btn navbar-item" data-toggle="modal" data-target="#searchModal">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 text-center">
+                <div class="post-heading text-white">
+                    <h1>压缩感知</h1>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Main Content -->
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                
+                    <span class="meta d-inline-block">
+    
+    
+    <!-- Date -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-calendar-check fa-fw"></i>
+        2020-06-17
+    
+    <!-- word count and read count -->
+    
+
+    
+
+    
+</span>  
+                
+                <h1 id="压缩感知"><a href="#压缩感知" class="headerlink" title="压缩感知"></a>压缩感知</h1><ul>
+<li>内容来自于知乎学习<blockquote>
+<p>这个作者写的很好，之前和他学习过小波变换。<br>原文链接<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22445302">形象易懂讲解算法II——压缩感知</a></p>
+</blockquote>
+</li>
+<li>代码的参考来源来自<a target="_blank" rel="noopener" href="https://github.com/harrydragon/MATLAB/tree/master/MN/LAB2">Github-harrydragon</a></li>
+<li><em>突破了</em>信号处理领域的金科玉律——<em>奈奎斯特采样定律</em>。即，在信号采样的过程中，用很少的采样点，实现了和全采样一样的效果。</li>
+</ul>
+<h2 id="前提条件1：稀疏性（sparsity）"><a href="#前提条件1：稀疏性（sparsity）" class="headerlink" title="前提条件1：稀疏性（sparsity）"></a>前提条件1：稀疏性（sparsity）</h2><ul>
+<li><p>若信号在某个域中只有少量非零值，那么它在该域稀疏，该域也被称为信号的稀疏域。</p>
+</li>
+<li><p>然而通常信号在变换域中不会呈现完全的稀疏性。其实只要它近似满足稀疏性，即大部分值趋于零，只有少量大的非零值，就可以认为它是可压缩信号，可以对它进行CS亚采样。</p>
+</li>
+<li><p>对于之前讲的例子，如果它在频域中不稀疏，我们可以做DWT、DCT等，找到它的稀疏变换。</p>
+<blockquote>
+<p>DWT （Discrete Wavelet Transformation） 离散小波变换<br>DCT （Discrete Cosine Transform） 离散余弦变换\</p>
+</blockquote>
+<blockquote>
+<p>稀疏性普遍用作图像压缩，eg.JPEG<br>将图像的数据转到稀疏的域，留下主成分，将其余置零。</p>
+</blockquote>
+<blockquote>
+<p>图像压缩 与 压缩感知的区别：</p>
+<blockquote>
+<p>图像压缩：全采样，再压缩。<br>压缩感知：亚采样，用算法消除亚采样的伪影。<br>压缩感知在采样时候，完成的压缩。</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<h2 id="压缩感知-1"><a href="#压缩感知-1" class="headerlink" title="压缩感知"></a>压缩感知</h2><center><div class="img-item" data-src="压缩感知/image1.png" data-sub-html=".caption"><img src="压缩感知/image1.png" ></div>信号频谱</center>
+
+
+<ul>
+<li><p>如图，x是为长度N的一维信号，也就是原信号，稀疏度为k。此刻它是未知的。</p>
+</li>
+<li><p>Φ为观测矩阵，对应着亚采样这一过程。它将高维信号x投影到低维空间，是已知的。</p>
+</li>
+<li><p>y=Φx为长度M的一维测量值，也就是亚采样后的结果。显然它也是已知的。</p>
+</li>
+<li><p>因此，压缩感知问题就是在已知测量值y和测量矩阵Φ的基础上，求解欠定方程组y=Φx得到原信号x。</p>
+</li>
+<li><p>然而，一般的自然信号x本身并不是稀疏的，需要在某种稀疏基上进行稀疏表示。令x=Ψs，Ψ为稀疏基矩阵，s为稀疏系数。</p>
+</li>
+<li><p>于是最终方程就变成了：y=ΦΨs。已知y、Φ、Ψ，求解s。</p>
+</li>
+</ul>
+<center><div class="img-item" data-src="压缩感知/image2.png" data-sub-html=".caption"><img src="压缩感知/image2.png" ></div>信号频谱</center>
+
+<ul>
+<li> y=ΦΨs有点长，我们把ΦΨ合并成一个矩阵，称之为传感矩阵。即令Θ=ΦΨ<br>，则y=ΘS。</li>
+<li>问题即为，已知y和Θ，求解S。求解出S后，由x=Ψs即可得到恢复出的原信号x。</li>
+<li>然而在正常情况下，方程的个数远小于未知数的个数，方程是没有确定解的，无法重构信号。但是，由于信号是K稀疏，如果上式中的Φ满足有限等距性质(RIP)，则K个系数就能够从M个测量值准确重构（得到一个最优解）。</li>
+</ul>
+<h2 id="前提条件2：不相关性（incoherence）"><a href="#前提条件2：不相关性（incoherence）" class="headerlink" title="前提条件2：不相关性（incoherence）"></a>前提条件2：不相关性（incoherence）</h2><table>
+    <tr>
+        <td ><center><div class="img-item" data-src="压缩感知/image3.png" data-sub-html=".caption"><img src="压缩感知/image3.png" ></div> </center></td>
+        <td ><center><div class="img-item" data-src="压缩感知/image4.png" data-sub-html=".caption"><img src="压缩感知/image4.png" ></div> </center></td>
+    </tr>
+</table>
+
+<ul>
+<li>陶哲轩和Candès大神证明了RIP才是观测矩阵要满足的准确要求。但是，要确认一个矩阵是否满足RIP非常复杂。于是Baraniuk证明：RIP的等价条件是观测矩阵和稀疏表示基不相关（incoherent）。 </li>
+</ul>
+<center><div class="img-item" data-src="压缩感知/image5.png" data-sub-html=".caption"><img src="压缩感知/image5.png" ></div>信号频谱</center>
+
+<ul>
+<li><p>那怎样找到不相关的观测矩阵呢？陶哲轩和Candès又证明： <strong>独立同分布的高斯随机测量矩阵可以成为普适的压缩感知测量矩阵。</strong></p>
+</li>
+<li><p>于是满足高斯分布的随机测量矩阵就成了CS最常用的观测矩阵。</p>
+</li>
+<li><p>对于二维信号，往往就采用如右上图所示的采样矩阵对图像进行亚采样。</p>
+</li>
+<li><p>对于一维信号，采用前文提到的随机不等间距的亚采样即可。</p>
+</li>
+</ul>
+<h2 id="概括总结"><a href="#概括总结" class="headerlink" title="概括总结"></a>概括总结</h2><ul>
+<li><p>如果一个信号在<strong>某个变换域是稀疏的</strong>，那么就可以用一个<strong>与变换基不相关的观测矩阵</strong>将变换所得高维信号投影到一个低维空间上，然后通过<strong>求解一个优化问题</strong>就可以从这些少量的投影中以高概率重构出原信号。</p>
+</li>
+<li><p>之前图像压缩的方法是全采样之后再压缩，抛弃稀疏变换域中的一些小系数；而CS直接减少了采样点，采集完后、经过重建的图像，就是一副在某变换域稀疏的压缩图像，比如JPEG。</p>
+</li>
+<li><p>优势：</p>
+<blockquote>
+<p>对于很多情形，比如照相机拍摄照片，这样减少采样点并没有优势。因为所有像素的采集在一瞬间就都完成了。<br>但是对于一些采集比较慢的情形，比如核磁共振成像，CS就可以发挥巨大优势。原本一副MRI图像常常需要几十秒，速度慢也是MRI的一大缺陷。而应用CS技术后，只需要采集全采样几分之一的数据，就可以重建出原图。这样就可以把成像速度提高好几倍，同时对图像质量影响不大。<br>另一个应用是Rice大学开发的单像素相机，也就是说这种相机只需要一个像素，非常有趣。感兴趣的朋友可以自己去调查。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="算法理解"><a href="#算法理解" class="headerlink" title="算法理解"></a>算法理解</h2><center><div class="img-item" data-src="压缩感知/image6.png" data-sub-html=".caption"><img src="压缩感知/image6.png" ></div>信号频谱</center>
+
+<p>公式：<br>$$ y=\phi x $$</p>
+<ul>
+<li>其中 $x$为 $N \times 1$的矩阵，eg.一个信号长度为$512 \times 1$</li>
+<li>在这一个列向量中，有K个非零量，K远小于N，其他的近似于零。因此信号 $x$ 稀疏。<blockquote>
+<p>如果是一个二维数组，则可以按照列，将其排列成列向量。（？）</p>
+</blockquote>
+</li>
+</ul>
+<p>创造一个大小为 $M\times N$的测量矩阵。该矩阵可以为</p>
+<ul>
+<li><details>
+  <summary>(1) 随机高斯测量矩阵</summary>
+
+  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ Phi ]</span> = <span class="title">GaussMtx</span><span class="params">( M,N )</span></span></span><br><span class="line"><span class="comment">%GaussMtx Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Generate Bernoulli matrix </span></span><br><span class="line"><span class="comment">%   M -- RowNumber</span></span><br><span class="line"><span class="comment">%   N -- ColumnNumber</span></span><br><span class="line"><span class="comment">%   Phi -- The Gauss matrix</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Generate Gauss matrix   </span></span><br><span class="line">    Phi = <span class="built_in">randn</span>(M,N);</span><br><span class="line">    <span class="comment">%Phi = Phi/sqrt(M);</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</details></li>
+<li><details>
+  <summary>(2) 随机贝努力测量矩阵</summary>
+
+  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ Phi ]</span> = <span class="title">BernoulliMtx</span><span class="params">( M,N )</span></span></span><br><span class="line"><span class="comment">%BernoulliMtx Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Generate Bernoulli matrix </span></span><br><span class="line"><span class="comment">%   M -- RowNumber</span></span><br><span class="line"><span class="comment">%   N -- ColumnNumber</span></span><br><span class="line"><span class="comment">%   Phi -- The Bernoulli matrix</span></span><br><span class="line"><span class="comment">%% (1)Generate Bernoulli matrix(The first kind)</span></span><br><span class="line"><span class="comment">% 1--P=0.5   -1--P=0.5</span></span><br><span class="line">    Phi = randi([<span class="number">0</span>,<span class="number">1</span>],M,N);<span class="comment">%If your MATLAB version is too low,please use randint instead</span></span><br><span class="line">    Phi(Phi==<span class="number">0</span>) = <span class="number">-1</span>;</span><br><span class="line"><span class="comment">%Phi = Phi/sqrt(M);</span></span><br><span class="line"><span class="comment">% %% (2)Generate Bernoulli matrix(The second kind)</span></span><br><span class="line"><span class="comment">% % 1--P=1/6   -1--P=1/6  0--2/3</span></span><br><span class="line"><span class="comment">%     Phi = randi([-1,4],M,N);%If your MATLAB version is too low,please use randint instead</span></span><br><span class="line"><span class="comment">%     Phi(Phi==2) = 0;%P=1/6</span></span><br><span class="line"><span class="comment">%     Phi(Phi==3) = 0;%P=1/6</span></span><br><span class="line"><span class="comment">%     Phi(Phi==4) = 0;%P=1/6</span></span><br><span class="line"><span class="comment">%     %Phi = Phi*sqrt(3/M);</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</details></li>
+<li><details>
+  <summary>(3) 部分哈达玛测量矩阵</summary>
+
+  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ Phi ]</span> = <span class="title">PartHadamardMtx</span><span class="params">( M,N )</span></span></span><br><span class="line"><span class="comment">%PartHadamardMtx Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Generate part Hadamard matrix </span></span><br><span class="line"><span class="comment">%   M -- RowNumber</span></span><br><span class="line"><span class="comment">%   N -- ColumnNumber</span></span><br><span class="line"><span class="comment">%   Phi -- The part Hadamard matrix</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% parameter initialization</span></span><br><span class="line"><span class="comment">%Because the MATLAB function hadamard handles only the cases where n, n/12,</span></span><br><span class="line"><span class="comment">%or n/20 is a power of 2</span></span><br><span class="line">    L_t = <span class="built_in">max</span>(M,N);<span class="comment">%Maybe L_t does not meet requirement of function hadamard</span></span><br><span class="line">    L_t1 = (<span class="number">12</span> - <span class="built_in">mod</span>(L_t,<span class="number">12</span>)) + L_t;</span><br><span class="line">    L_t2 = (<span class="number">20</span> - <span class="built_in">mod</span>(L_t,<span class="number">20</span>)) + L_t; </span><br><span class="line">    L_t3 = <span class="number">2</span>^<span class="built_in">ceil</span>(<span class="built_in">log2</span>(L_t));</span><br><span class="line">    L = <span class="built_in">min</span>([L_t1,L_t2,L_t3]);<span class="comment">%Get the minimum L</span></span><br><span class="line"><span class="comment">%% Generate part Hadamard matrix   </span></span><br><span class="line">    Phi = [];</span><br><span class="line">    Phi_t = <span class="built_in">hadamard</span>(L);</span><br><span class="line">    RowIndex = randperm(L);</span><br><span class="line">    Phi_t_r = Phi_t(RowIndex(<span class="number">1</span>:M),:);</span><br><span class="line">    ColIndex = randperm(L);</span><br><span class="line">    Phi = Phi_t_r(:,ColIndex(<span class="number">1</span>:N));</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</details></li>
+<li><details>
+  <summary>(4) 部分傅里叶测量矩阵</summary>
+  
+  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ Phi ]</span> = <span class="title">PartFourierMtx</span><span class="params">( M,N )</span></span></span><br><span class="line"><span class="comment">%PartFourierMtx Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Generate part Fourier matrix </span></span><br><span class="line"><span class="comment">%   M -- RowNumber</span></span><br><span class="line"><span class="comment">%   N -- ColumnNumber</span></span><br><span class="line"><span class="comment">%   Phi -- The part Fourier matrix</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Generate part Fourier matrix   </span></span><br><span class="line">    Phi_t = fft(<span class="built_in">eye</span>(N,N))/<span class="built_in">sqrt</span>(N);<span class="comment">%Fourier matrix</span></span><br><span class="line">    RowIndex = randperm(N);</span><br><span class="line">    Phi = Phi_t(RowIndex(<span class="number">1</span>:M),:);<span class="comment">%Select M rows randomly</span></span><br><span class="line">    <span class="comment">%normalization</span></span><br><span class="line">    <span class="keyword">for</span> ii = <span class="number">1</span>:N</span><br><span class="line">        Phi(:,ii) = Phi(:,ii)/norm(Phi(:,ii));</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</details></li>
+<li><details>
+  <summary>(5) 稀疏随机测量矩阵</summary>
+
+  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ Phi ]</span> = <span class="title">SparseRandomMtx</span><span class="params">( M,N,d )</span></span></span><br><span class="line"><span class="comment">%SparseRandomMtx Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Generate SparseRandom matrix </span></span><br><span class="line"><span class="comment">%   M -- RowNumber</span></span><br><span class="line"><span class="comment">%   N -- ColumnNumber</span></span><br><span class="line"><span class="comment">%   d -- The number of &#x27;1&#x27; in every column,d&lt;M </span></span><br><span class="line"><span class="comment">%   Phi -- The SparseRandom matrix</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Generate SparseRandom matrix   </span></span><br><span class="line">    Phi = <span class="built_in">zeros</span>(M,N);</span><br><span class="line">    <span class="keyword">for</span> ii = <span class="number">1</span>:N</span><br><span class="line">        ColIdx = randperm(M);</span><br><span class="line">        Phi(ColIdx(<span class="number">1</span>:d),ii) = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</details></li>
+</ul>
+<ul>
+<li>最终得到 $y$就是压缩后的信号。</li>
+<li>从 $y$ 和 $\phi$ 恢复出 $x$，就是恢复算法。</li>
+</ul>
+<p>$$M=O(K \log(N/K)) $$<br>$M$为测量矩阵$\phi$大小的选择。在这里如何取值，<strong>没有看明白。</strong></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>针对于<br>$$ f=\cos{\frac{2\pi t}{256}} + \sin{\frac{2\pi t}{128}}$$<br>这一个信号，它的频谱为：</p>
+<center><div class="img-item" data-src="压缩感知/image7.png" data-sub-html=".caption"><img src="压缩感知/image7.png" ></div>信号频谱</center>
+在频域上，可以认为这个信号稀疏，因此可以进行压缩感知。\
+代码如下:
+
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% 素质三连</span></span><br><span class="line">clc; clear all; close all</span><br><span class="line"><span class="comment">%% 初始化信号</span></span><br><span class="line">n = <span class="number">512</span>; <span class="comment">% Signal length</span></span><br><span class="line">s = <span class="number">2</span> ; <span class="comment">% Sparsity level</span></span><br><span class="line">m = <span class="number">40</span> ；<span class="comment">%1 + floor((s+1)*log10(n)); % Number of measurements</span></span><br><span class="line">fs=<span class="number">0.04</span>; <span class="comment">% 用于fft看频域%  t = [0:n-1]&#x27;/fs;</span></span><br><span class="line">t = [<span class="number">0</span>:n<span class="number">-1</span>]&#x27;;</span><br><span class="line">f = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>/<span class="number">256</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>/<span class="number">128</span>*t);</span><br><span class="line">fft_f=fft(f,n); <span class="comment">% 得到频域的稀疏信号</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% 多种传感矩阵</span></span><br><span class="line">A1 = get_A_random(n ,m);</span><br><span class="line">A2 = get_A_fourier(n ,m);</span><br><span class="line">A3 = PartHadamardMtx(n,m);</span><br><span class="line"></span><br><span class="line">A=A3; <span class="comment">% 选择一种传感矩阵</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% y=phi*x</span></span><br><span class="line">y =A*fft_f; <span class="comment">% Take the measurements</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Solve using CVX. 用CVX工具解优化</span></span><br><span class="line">cvx_begin</span><br><span class="line">    variable xp(n) <span class="built_in">complex</span>;</span><br><span class="line">    minimize(norm(xp,<span class="number">1</span>)) ;</span><br><span class="line">    subject to</span><br><span class="line">    A*xp == y </span><br><span class="line">cvx_end</span><br><span class="line"></span><br><span class="line">temp=norm(fft_f-xp)/norm(fft_f);</span><br><span class="line"><span class="comment">%% 逆傅里叶变换，回到时域</span></span><br><span class="line">ifft_signal=ifft(xp,n);</span><br><span class="line"> </span><br><span class="line"><span class="built_in">plot</span> ( f )</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line"><span class="comment">%subplot(2,1,2);</span></span><br><span class="line"><span class="built_in">plot</span> ( <span class="built_in">real</span>(ifft_signal) ,<span class="string">&#x27;r.&#x27;</span> ) <span class="comment">% 选取实部作图（虚部有极小的分量。）</span></span><br><span class="line"><span class="built_in">legend</span> ( <span class="string">&#x27; Original &#x27;</span> , <span class="string">&#x27; Recovered &#x27;</span> )</span><br></pre></td></tr></table></figure>
+<table>
+    <tr>
+        <td ><center><div class="img-item" data-src="压缩感知/image8.png" data-sub-html=".caption"><img src="压缩感知/image8.png" ></div>时域信号 </center></td>
+        <td ><center><div class="img-item" data-src="压缩感知/image9.png" data-sub-html=".caption"><img src="压缩感知/image9.png" ></div>频域信号（代码需另写） </center></td>
+    </tr>
+</table>
+
+<h1 id="接下来将更新一些关于硬件上的压缩感知实现。"><a href="#接下来将更新一些关于硬件上的压缩感知实现。" class="headerlink" title="接下来将更新一些关于硬件上的压缩感知实现。"></a>接下来将更新一些关于硬件上的压缩感知实现。</h1>
+            </div>
+
+            <!-- Post information -->
+            
+            
+    <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+        <ul class="pagination d-block text-center">
+            
+                <li class="previous page-item d-inline"><a href="/2020/06/20/%E6%95%A3%E6%96%91%E5%9B%BE%E5%83%8F%E6%AF%94%E5%AF%B9/" class="page-link float-left">&larr;  Newer Posts</a></li>
+            
+            
+        </ul>
+    </div>
+
+
+            
+                <!-- Comments -->
+                
+
+                
+
+            
+
+        </div>
+    </div>
+</article> 
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+    <style>
+        #toc-content .toc-link::before {
+            background-color: transparent;
+            max-height: 25px;
+        }
+
+        #toc-content .toc-link.is-active-link::before {
+            background-color: #404040;
+        }
+    </style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <div class="ui-toc dropup scrollspy-body pull-right" style="right: 3%;">
+        <button type="button" class="toc-btn btn btn-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+            <i class="fas fa-list"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right p-2"  aria-labelledby="tocLabel">
+            <div class="toc-widget">
+                <div id="toc-content" class="text-truncate">
+                </div>
+            </div>
+            <div class="toc-menu pt-3 pl-4">
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">Expand all</span><span class="close-text" style="display: none;">Collapse all</span></a>
+                <a class="back-to-top d-block py-1" href="#">Back to top</a>
+                <a class="go-to-bottom d-block py-1" href="#">Go to bottom</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        tocbot.init({
+            // Where to render the table of contents.
+            tocSelector: '#toc-content',
+            // Where to grab the headings to build the table of contents.
+            contentSelector: 'article',
+            // Which headings to grab inside of the contentSelector element.
+            headingSelector: 'h1, h2, h3',
+            // For headings inside relative or absolute positioned containers within content.
+            hasInnerContainers: true,
+        });
+    </script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+        MathJax.Hub.Config({
+            tex2jax:{inlineMath:[['$', '$']]}
+        })
+    </script>
+
+    
+
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 text-center">
+                <ul class="list-inline">
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <ul class="copyright footer-menu list-inline">
+                    
+                    
+                        <li class="list-inline-item">
+                            
+                            
+                            <a href="/">
+                                
+                                    Home
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/archives">
+                                
+                                    Archives
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/tags">
+                                
+                                    Tags
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/categories">
+                                
+                                    Categories
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/about">
+                                
+                                    About
+                                
+                            </a>
+                        </li>
+                    
+                </ul>
+                <p class="copyright footer-author">
+                    &copy; -2021 
+                    <a rel="external" class="copyright-link" href="" target="_blank">Wilson Xu</a><br/>
+                    Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
+                    <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
+                    Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                    
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    <!-- jQuery -->
+<script src="//cdn.jsdelivr.net/npm/jquery@2.1.4/dist/jquery.min.js"></script>
+
+<!-- For drop down -->
+<script src="//cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
+<!-- Gallery -->
+<script src="//cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery-all.min.js"></script>
+<!-- Busuanzi -->
+
+
+<!-- Search script -->
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    $(function () {
+        searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+    });
+</script>
+
+
+<script src="/js/main.js"></script>
+
+
+    <!-- Search Modal -->
+    <!-- Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content overflow-auto">
+            <div class="modal-header">
+                <input type="text" class="form-control" placeholder="Searching Keywords..." id="searchInput">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="searchResult">
+                    <div class="search-empty text-center text-muted p-5">
+                        <i class="far fa-meh"></i>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

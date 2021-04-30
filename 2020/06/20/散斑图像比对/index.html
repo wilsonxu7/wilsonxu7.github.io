@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<!--Description-->
+
+
+
+    <meta name="description" content="散斑图像比对是这么搞的首先来搞清楚怎么采集的数据。
+采集方法简化版如下图所示。
+
+采集数据示意图
+
+激光器发出可调波长的激光，在光纤另一端固定位置放置CCD相机，拍摄散斑图像。
+每次调整波长改变0.1nm，拍摄图像，存储数据。
+下图是两张delta波长=0.1nm的散斑图像。非常相似。
+
+
+    "/>
+
+
+<!--Author-->
+
+    <meta name="author" content="Wilson Xu"/>
+
+
+<!--Open Graph Title-->
+
+    <meta property="og:title" content="散斑图像比对"/>
+
+
+<!--Open Graph Description-->
+
+    <meta property="og:description" content="散斑图像比对是这么搞的首先来搞清楚怎么采集的数据。
+采集方法简化版如下图所示。
+
+采集数据示意图
+
+激光器发出可调波长的激光，在光纤另一端固定位置放置CCD相机，拍摄散斑图像。
+每次调整波长改变0.1nm，拍摄图像，存储数据。
+下图是两张delta波长=0.1nm的散斑图像。非常相似。
+
+
+    "/>
+
+
+<!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Wilson&#39;s Blog"/>
+
+<!--Type page-->
+
+    <meta property="og:type" content="article"/>
+
+
+<!--Page Cover-->
+
+
+    <meta property="og:image" content="http://example.com/img/home-bg.jpg"/>
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+
+
+
+
+    <meta name="twitter:image" content="http://example.com/img/home-bg.jpg"/>
+
+
+<!-- Title -->
+
+<title>散斑图像比对 - Wilson&#39;s Blog</title>
+
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+
+<!-- Custom CSS -->
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css" />
+<link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- Gallery -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/featherlight@1.4.0/src/featherlight.css" integrity="sha256-30DV/STftlyQ6v8yaOWlabammvCYtRJERLj/m0b3zno=" crossorigin="anonymous">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/css/lightgallery.min.css">
+
+<!-- favicon -->
+
+<link rel="icon" href="/img/favicon.png"/>
+
+
+
+    <!-- Google Analytics -->
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<!-- Head tag -->
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top bg-transparent position-absolute w-100 p-0" id="nav">
+    <div class="container pl-0 pr-0">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <a class="navbar-brand text-white p-1 pl-3" href="/">Wilson's Blog</a>
+        </div>
+        <div class="navbar-nav float-right">
+            <button class="btn btn-link search-btn navbar-item" data-toggle="modal" data-target="#searchModal">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 text-center">
+                <div class="post-heading text-white">
+                    <h1>散斑图像比对</h1>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Main Content -->
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                
+                    <span class="meta d-inline-block">
+    
+    
+    <!-- Date -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-calendar-check fa-fw"></i>
+        2020-06-20
+    
+    <!-- word count and read count -->
+    
+
+    
+
+    
+</span>  
+                
+                <h1 id="散斑图像比对是这么搞的"><a href="#散斑图像比对是这么搞的" class="headerlink" title="散斑图像比对是这么搞的"></a>散斑图像比对是这么搞的</h1><h2 id="首先来搞清楚怎么采集的数据。"><a href="#首先来搞清楚怎么采集的数据。" class="headerlink" title="首先来搞清楚怎么采集的数据。"></a>首先来搞清楚怎么采集的数据。</h2><ul>
+<li>采集方法简化版如下图所示。</li>
+</ul>
+<p><div class="img-item" data-src="%E6%95%A3%E6%96%91%E5%9B%BE%E5%83%8F%E6%AF%94%E5%AF%B9/01.png" data-sub-html=".caption"><img src="%E6%95%A3%E6%96%91%E5%9B%BE%E5%83%8F%E6%AF%94%E5%AF%B9/01.png" alt="采集数据示意图"><div class="img-caption d-block text-center"><span class="center-caption text-muted border-bottom">采集数据示意图</span></div></div></p>
+<ul>
+<li>激光器发出可调波长的激光，在光纤另一端固定位置放置CCD相机，拍摄散斑图像。</li>
+<li>每次调整波长改变0.1nm，拍摄图像，存储数据。</li>
+<li>下图是两张delta波长=0.1nm的散斑图像。非常相似。</li>
+</ul>
+<table>
+    <tr>
+        <td ><center><div class="img-item" data-src="散斑图像比对/a.png" data-sub-html=".caption"><img src="散斑图像比对/a.png" ></div>图1  散斑图像1 </center></td>
+        <td ><center><div class="img-item" data-src="散斑图像比对/b.png" data-sub-html=".caption"><img src="散斑图像比对/b.png"  ></div>图2 散斑图像2 </center></td>
+    </tr>
+</table>
+
+<h2 id="光纤散斑图像比对"><a href="#光纤散斑图像比对" class="headerlink" title="光纤散斑图像比对"></a>光纤散斑图像比对</h2><h3 id="直接进行相关性分析"><a href="#直接进行相关性分析" class="headerlink" title="直接进行相关性分析"></a>直接进行相关性分析</h3><ul>
+<li>主要使用MATLAB的corr2函数，计算两两图片之间的相关性。</li>
+</ul>
+<details>
+  <summary>Matlab代码</summary>
+  
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">close all;</span><br><span class="line">clear;</span><br><span class="line">clc;</span><br><span class="line"><span class="comment">%有好的素质三连</span></span><br><span class="line"></span><br><span class="line">Pic_num=<span class="number">509</span>; <span class="comment">% 共有509张图片</span></span><br><span class="line">R=<span class="built_in">zeros</span>(Pic_num,Pic_num);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">1</span>:Pic_num</span><br><span class="line">    s=strcat(<span class="string">&#x27;picture (&#x27;</span>,num2str(<span class="built_in">i</span>),<span class="string">&#x27;).png&#x27;</span>);</span><br><span class="line">    img_a=rgb2gray(imread(s));</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">1</span>:Pic_num</span><br><span class="line">        s=strcat(<span class="string">&#x27;picture (&#x27;</span>,num2str(<span class="built_in">j</span>),<span class="string">&#x27;).png&#x27;</span>);</span><br><span class="line">        img_b=rgb2gray(imread(s));</span><br><span class="line">        R(<span class="built_in">i</span>,<span class="built_in">j</span>)=corr2(img_a,img_b);</span><br><span class="line">        R(<span class="built_in">j</span>,<span class="built_in">i</span>)=R(<span class="built_in">i</span>,<span class="built_in">j</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">% R(find(R==0))= NaN;</span></span><br><span class="line"><span class="comment">% R(find(R==1))= NaN;</span></span><br><span class="line">save(<span class="string">&#x27;R.mat&#x27;</span>,<span class="string">&#x27;R&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">%绘制 类混淆矩阵</span></span><br><span class="line">imagesc(R);</span><br></pre></td></tr></table></figure>
+</details>
+
+<ul>
+<li>得到结果如图所示。黄色为相关性最高的1。可以再斜对角线周围看到明显的淡黄色光晕。即相近波长，在同一位置的散斑图像相关性要高一些。</li>
+</ul>
+<p><div class="img-item" data-src="%E6%95%A3%E6%96%91%E5%9B%BE%E5%83%8F%E6%AF%94%E5%AF%B9/02.png" data-sub-html=".caption"><img src="%E6%95%A3%E6%96%91%E5%9B%BE%E5%83%8F%E6%AF%94%E5%AF%B9/02.png" alt="相关性计算结果"><div class="img-caption d-block text-center"><span class="center-caption text-muted border-bottom">相关性计算结果</span></div></div></p>
+<ul>
+<li>在200处看到有类似比较明显的错误，但经过原始数据比对，并非图像存储出现了问题，而是在被误判的几张图市场相近。</li>
+</ul>
+<h3 id="计算汉明距离"><a href="#计算汉明距离" class="headerlink" title="计算汉明距离"></a>计算汉明距离</h3><ul>
+<li>使用Python</li>
+</ul>
+<details>
+  <summary>汉明距离相似度计算dHash.py</summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># Author:  zuowei</span></span><br><span class="line"><span class="comment"># CreateDate: 2020-6-9</span></span><br><span class="line"><span class="comment"># function: 实现dHash算法：产生dHash编码，利用汉明距离进行相似度计算</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># hitz的左大佬提供了代码，保护！</span></span><br></pre></td></tr></table></figure>
+</details>
+<details>
+    <summary>汉明距离-主函数match.py</summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> dHash <span class="keyword">import</span> DHash</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    DHsh = DHash()</span><br><span class="line">    Pic_num = <span class="number">509</span></span><br><span class="line">    i = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(Pic_num):</span><br><span class="line">        pth = <span class="string">&quot;D:\\wavelengths\\atest\\picture (&quot;</span> + <span class="built_in">str</span>(i+<span class="number">1</span>) + <span class="string">&quot;).png&quot;</span></span><br><span class="line">        image_a = Image.<span class="built_in">open</span>(pth).convert(<span class="string">&#x27;L&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(Pic_num):</span><br><span class="line">            pth = <span class="string">&quot;D:\\wavelengths\\atest\\picture (&quot;</span> + <span class="built_in">str</span>(j+<span class="number">1</span>) + <span class="string">&quot;).png&quot;</span></span><br><span class="line">            image_b = Image.<span class="built_in">open</span>(pth).convert(<span class="string">&#x27;L&#x27;</span>)</span><br><span class="line">            hamming_distance = DHash.hamming_distance(</span><br><span class="line">                first=image_a, second=image_b)</span><br><span class="line">            R[i, j] = hamming_distance</span><br><span class="line"><span class="comment">#    print(R)</span></span><br><span class="line">    np.savetxt(<span class="string">&quot;AAAA&quot;</span>, R)</span><br></pre></td></tr></table></figure>
+</details>
+
+<ul>
+<li>得到结果如图所示，效果并不好，甚至没有最简单的相关性计算的结果好。</li>
+</ul>
+<p><div class="img-item" data-src="%E6%95%A3%E6%96%91%E5%9B%BE%E5%83%8F%E6%AF%94%E5%AF%B9/03.png" data-sub-html=".caption"><img src="%E6%95%A3%E6%96%91%E5%9B%BE%E5%83%8F%E6%AF%94%E5%AF%B9/03.png" alt="哈明距离结果"><div class="img-caption d-block text-center"><span class="center-caption text-muted border-bottom">哈明距离结果</span></div></div></p>
+
+            </div>
+
+            <!-- Post information -->
+            
+            
+    <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+        <ul class="pagination d-block text-center">
+            
+                <li class="previous page-item d-inline"><a href="/2021/04/30/hello-world/" class="page-link float-left">&larr;  Newer Posts</a></li>
+            
+            
+                <li class="next page-item d-inline"><a href="/2020/06/17/%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/" class="page-link float-right">Older Posts  &rarr;</a></li>
+            
+        </ul>
+    </div>
+
+
+            
+                <!-- Comments -->
+                
+
+                
+
+            
+
+        </div>
+    </div>
+</article> 
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+    <style>
+        #toc-content .toc-link::before {
+            background-color: transparent;
+            max-height: 25px;
+        }
+
+        #toc-content .toc-link.is-active-link::before {
+            background-color: #404040;
+        }
+    </style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <div class="ui-toc dropup scrollspy-body pull-right" style="right: 3%;">
+        <button type="button" class="toc-btn btn btn-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+            <i class="fas fa-list"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right p-2"  aria-labelledby="tocLabel">
+            <div class="toc-widget">
+                <div id="toc-content" class="text-truncate">
+                </div>
+            </div>
+            <div class="toc-menu pt-3 pl-4">
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">Expand all</span><span class="close-text" style="display: none;">Collapse all</span></a>
+                <a class="back-to-top d-block py-1" href="#">Back to top</a>
+                <a class="go-to-bottom d-block py-1" href="#">Go to bottom</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        tocbot.init({
+            // Where to render the table of contents.
+            tocSelector: '#toc-content',
+            // Where to grab the headings to build the table of contents.
+            contentSelector: 'article',
+            // Which headings to grab inside of the contentSelector element.
+            headingSelector: 'h1, h2, h3',
+            // For headings inside relative or absolute positioned containers within content.
+            hasInnerContainers: true,
+        });
+    </script>
+
+
+    
+
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 text-center">
+                <ul class="list-inline">
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <ul class="copyright footer-menu list-inline">
+                    
+                    
+                        <li class="list-inline-item">
+                            
+                            
+                            <a href="/">
+                                
+                                    Home
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/archives">
+                                
+                                    Archives
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/tags">
+                                
+                                    Tags
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/categories">
+                                
+                                    Categories
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/about">
+                                
+                                    About
+                                
+                            </a>
+                        </li>
+                    
+                </ul>
+                <p class="copyright footer-author">
+                    &copy; -2021 
+                    <a rel="external" class="copyright-link" href="" target="_blank">Wilson Xu</a><br/>
+                    Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
+                    <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
+                    Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                    
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    <!-- jQuery -->
+<script src="//cdn.jsdelivr.net/npm/jquery@2.1.4/dist/jquery.min.js"></script>
+
+<!-- For drop down -->
+<script src="//cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
+<!-- Gallery -->
+<script src="//cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery-all.min.js"></script>
+<!-- Busuanzi -->
+
+
+<!-- Search script -->
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    $(function () {
+        searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+    });
+</script>
+
+
+<script src="/js/main.js"></script>
+
+
+    <!-- Search Modal -->
+    <!-- Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content overflow-auto">
+            <div class="modal-header">
+                <input type="text" class="form-control" placeholder="Searching Keywords..." id="searchInput">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="searchResult">
+                    <div class="search-empty text-center text-muted p-5">
+                        <i class="far fa-meh"></i>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
