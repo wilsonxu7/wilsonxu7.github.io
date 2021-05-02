@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":false,"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false};
+  </script>
+
+  <meta name="description" content="TSP问题是经典的优化问题，是NP-Complete问题。 1、笨方法 2、GA算法 3、Artificial Bee Colony Algorithm Travelling Salesman ProblemThere are N cities with the distance between city i and city j given by dij. Problem:  find a cl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nonlinear_Optimization_TSP">
+<meta property="og:url" content="http://example.com/2021/05/02/Nonlinear-Optimization-TSP/index.html">
+<meta property="og:site_name" content="Wilson&#39;s Blog">
+<meta property="og:description" content="TSP问题是经典的优化问题，是NP-Complete问题。 1、笨方法 2、GA算法 3、Artificial Bee Colony Algorithm Travelling Salesman ProblemThere are N cities with the distance between city i and city j given by dij. Problem:  find a cl">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/05/02/Nonlinear-Optimization-TSP/image-20210502142240519.png">
+<meta property="og:image" content="http://example.com/2021/05/02/Nonlinear-Optimization-TSP/image-20210502142544445.png">
+<meta property="og:image" content="http://example.com/2021/05/02/Nonlinear-Optimization-TSP/image-20210502150017090.png">
+<meta property="og:image" content="http://example.com/2021/05/02/Nonlinear-Optimization-TSP/image-20210502151456421.png">
+<meta property="og:image" content="http://example.com/2021/05/02/Nonlinear-Optimization-TSP/image-20210502154843857.png">
+<meta property="og:image" content="http://example.com/2021/05/02/Nonlinear-Optimization-TSP/image-20210502154922385.png">
+<meta property="og:image" content="http://example.com/2021/05/02/Nonlinear-Optimization-TSP/image-20210502155104654.png">
+<meta property="og:image" content="http://example.com/2021/05/02/Nonlinear-Optimization-TSP/image-20210502155222840.png">
+<meta property="article:published_time" content="2021-05-02T08:04:07.000Z">
+<meta property="article:modified_time" content="2021-05-02T08:12:36.462Z">
+<meta property="article:author" content="Wilson Xu">
+<meta property="article:tag" content="Nonlinear_Optimization, TSP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/05/02/Nonlinear-Optimization-TSP/image-20210502142240519.png">
+
+<link rel="canonical" href="http://example.com/2021/05/02/Nonlinear-Optimization-TSP/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>Nonlinear_Optimization_TSP | Wilson's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Wilson's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/02/Nonlinear-Optimization-TSP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wilson Xu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wilson's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Nonlinear_Optimization_TSP
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">نُشر في</span>
+              
+
+              <time title="أُنشأ: 2021-05-02 16:04:07 / عُدل: 16:12:36" itemprop="dateCreated datePublished" datetime="2021-05-02T16:04:07+08:00">2021-05-02</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>TSP问题是经典的优化问题，是NP-Complete问题。</p>
+<p>1、笨方法</p>
+<p>2、GA算法</p>
+<p>3、Artificial Bee Colony Algorithm</p>
+<h2 id="Travelling-Salesman-Problem"><a href="#Travelling-Salesman-Problem" class="headerlink" title="Travelling Salesman Problem"></a>Travelling Salesman Problem</h2><p>There are N cities with the distance between city i and city j given by dij. Problem:  find a close route through all the cities so that minimizes the total route length. </p>
+<p>Write a Matlab function that implements the objective function for this problem.  The input arguments are a route described as a permutation of the numbers 1 to N,  as well as the distance data stored in an appropriate form.</p>
+<p>Demonstrate operation of your function using examples of your choice. Visualize  the cities location as well as a route using suitable plots (see below). </p>
+<p>Implement and visualize simple optimization procedure that modifies the route by  random swapping two cities on the route (the updated route is accepted if it reduces  the objective function).</p>
+<img src="/2021/05/02/Nonlinear-Optimization-TSP/image-20210502142240519.png" class title="image-20210502142240519">
+
+<h2 id="笨方法"><a href="#笨方法" class="headerlink" title="笨方法"></a>笨方法</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Course: Nonlinear Optimization. %</span></span><br><span class="line"><span class="comment">% FALL.2019. Dr. Cheng. %</span></span><br><span class="line"><span class="comment">% Assignment: 3 %</span></span><br><span class="line"><span class="comment">% Date:(2019.9.20) %</span></span><br><span class="line"><span class="comment">% By: (许维杰) % % %</span></span><br><span class="line"><span class="comment">% ID NUMBER: (11930535) %</span></span><br><span class="line"><span class="comment">% LAB:(3.2) %</span></span><br><span class="line"><span class="comment">% Description: STUPID methods for Travelling Salesman Problem. %</span></span><br><span class="line"><span class="comment">% all inputs. %</span></span><br><span class="line"><span class="comment">%+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++%</span></span><br><span class="line">close all;</span><br><span class="line">clear all;</span><br><span class="line">clc;</span><br><span class="line"></span><br><span class="line">NUM_city=<span class="number">12</span>;    <span class="comment">%多少个城市</span></span><br><span class="line">NUM_G= prod(<span class="number">1</span>:NUM_city);   <span class="comment">%算法跑多少遍</span></span><br><span class="line"><span class="comment">% NUM_G=100;</span></span><br><span class="line"></span><br><span class="line">cities=<span class="built_in">floor</span>(<span class="built_in">rand</span>(<span class="number">2</span>,NUM_city)*<span class="number">100</span>); <span class="comment">%随机城市位置</span></span><br><span class="line">distances = calculateDistance(cities);</span><br><span class="line">SUM_distance=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:NUM_city<span class="number">-1</span></span><br><span class="line">    SUM_distance=SUM_distance+distances(<span class="built_in">i</span>,<span class="built_in">i</span>+<span class="number">1</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">paint(cities);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> time=<span class="number">1</span>:NUM_G</span><br><span class="line">    draw_flag=<span class="number">0</span>;</span><br><span class="line">    index=randperm(NUM_city);</span><br><span class="line">    temp_cities=cities(:,index);</span><br><span class="line">    temp_distances = calculateDistance(temp_cities);</span><br><span class="line">    temp_SUM_distance=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:NUM_city<span class="number">-1</span></span><br><span class="line">        temp_SUM_distance=temp_SUM_distance+temp_distances(<span class="built_in">i</span>,<span class="built_in">i</span>+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">if</span> SUM_distance&gt;temp_SUM_distance</span><br><span class="line">        SUM_distance=temp_SUM_distance;</span><br><span class="line">        draw_flag=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">if</span> draw_flag==<span class="number">1</span></span><br><span class="line">        paint(temp_cities);</span><br><span class="line">        <span class="comment">%画图</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">% Attach the parts above to a Word document and the results should be shown below.</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ distances ]</span> = <span class="title">calculateDistance</span><span class="params">( city )</span></span></span><br><span class="line">    [~, col] = <span class="built_in">size</span>(city);</span><br><span class="line">    distances = <span class="built_in">zeros</span>(col);</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:col</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:col</span><br><span class="line">            distances(<span class="built_in">i</span>,<span class="built_in">j</span>)=distances(<span class="built_in">i</span>,<span class="built_in">j</span>)+ <span class="built_in">sqrt</span>((city(<span class="number">1</span>,<span class="built_in">i</span>)-city(<span class="number">1</span>,<span class="built_in">j</span>))^<span class="number">2</span>+(city(<span class="number">2</span>,<span class="built_in">i</span>)-city(<span class="number">2</span>,<span class="built_in">j</span>))^<span class="number">2</span>  );           </span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[]</span> = <span class="title">paint</span><span class="params">(cities)</span></span></span><br><span class="line">        pause(<span class="number">0.2</span>);</span><br><span class="line">        <span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">plot</span>(cities(<span class="number">1</span>,:),cities(<span class="number">2</span>,:),<span class="string">&#x27;*&#x27;</span>,<span class="string">&#x27;MarkerSize&#x27;</span>, <span class="number">8</span>);</span><br><span class="line">        axis equal</span><br><span class="line">        <span class="built_in">hold</span> on;</span><br><span class="line">        <span class="built_in">plot</span>(cities(<span class="number">1</span>,:),cities(<span class="number">2</span>,:), <span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">1</span>);</span><br><span class="line">        axis equal</span><br><span class="line">        grid on</span><br><span class="line">        drawnow</span><br><span class="line">        <span class="built_in">hold</span> off;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>I use function rand to get the cities position. Write function calculateDistance to get the distances between cities. Then  use randperm to swap the order of cities, get the new total distance. If it get smaller, draw the path. I just use a <strong>very stupid way</strong> to get the answer, and it needs a lot of time to get the answer. The better algorithm is the  <strong>Genetic algorithm</strong>.</p>
+<p>在这里第一次接触优化算法，笨方法效率太低，跑的太慢。在后面的练习中，使用了多种不同的算法来解决TSP问题。</p>
+<img src="/2021/05/02/Nonlinear-Optimization-TSP/image-20210502142544445.png" class title="image-20210502142544445">
+
+<h2 id="GA算法"><a href="#GA算法" class="headerlink" title="GA算法"></a>GA算法</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">clear;</span><br><span class="line">clc;</span><br><span class="line">tStart = tic; <span class="comment">% 算法计时器</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%%%%%%%%%%%%自定义参数%%%%%%%%%%%%%</span></span><br><span class="line"></span><br><span class="line">cityNum = <span class="number">200</span>;</span><br><span class="line">maxGEN = <span class="number">200000</span>;</span><br><span class="line">popSize = <span class="number">100</span>; <span class="comment">% 遗传算法种群大小</span></span><br><span class="line">crossoverProbabilty = <span class="number">0.9</span>; <span class="comment">%交叉概率</span></span><br><span class="line">mutationProbabilty = <span class="number">0.1</span>; <span class="comment">%变异概率</span></span><br><span class="line"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span></span><br><span class="line"></span><br><span class="line">gbest = Inf;</span><br><span class="line"><span class="comment">% 随机生成城市位置</span></span><br><span class="line">cities = <span class="built_in">rand</span>(<span class="number">2</span>,cityNum) * <span class="number">100</span>;<span class="comment">%100是最远距离</span></span><br><span class="line"><span class="comment">% 计算上述生成的城市距离</span></span><br><span class="line">distances = calculateDistance(cities);</span><br><span class="line"><span class="comment">% 生成种群，每个个体代表一个路径</span></span><br><span class="line">pop = <span class="built_in">zeros</span>(popSize, cityNum);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:popSize</span><br><span class="line">pop(<span class="built_in">i</span>,:) = randperm(cityNum); </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">offspring = <span class="built_in">zeros</span>(popSize,cityNum);</span><br><span class="line"><span class="comment">%保存每代的最小路劲便于画图</span></span><br><span class="line">minPathes = <span class="built_in">zeros</span>(maxGEN,<span class="number">1</span>);</span><br><span class="line"><span class="comment">% GA算法</span></span><br><span class="line"><span class="keyword">for</span>  gen=<span class="number">1</span>:maxGEN</span><br><span class="line">    <span class="comment">% 计算适应度的值，即路径总距离</span></span><br><span class="line">    [fval, sumDistance, minPath, maxPath] = fitness(distances, pop);</span><br><span class="line">    <span class="comment">% 轮盘赌选择</span></span><br><span class="line">    tournamentSize=<span class="number">4</span>; <span class="comment">%设置大小</span></span><br><span class="line">    <span class="keyword">for</span> k=<span class="number">1</span>:popSize</span><br><span class="line">    <span class="comment">% 选择父代进行交叉</span></span><br><span class="line">        tourPopDistances=<span class="built_in">zeros</span>( tournamentSize,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:tournamentSize</span><br><span class="line">            randomRow = randi(popSize);</span><br><span class="line">            tourPopDistances(<span class="built_in">i</span>,<span class="number">1</span>) = sumDistance(randomRow,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="comment">% 选择最好的，即距离最小的</span></span><br><span class="line">        parent1  = <span class="built_in">min</span>(tourPopDistances);</span><br><span class="line">        [parent1X,parent1Y] = <span class="built_in">find</span>(sumDistance==parent1,<span class="number">1</span>, <span class="string">&#x27;first&#x27;</span>);</span><br><span class="line">        parent1Path = pop(parent1X(<span class="number">1</span>,<span class="number">1</span>),:);</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:tournamentSize</span><br><span class="line">            randomRow = randi(popSize);</span><br><span class="line">            tourPopDistances(<span class="built_in">i</span>,<span class="number">1</span>) = sumDistance(randomRow,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        parent2  = <span class="built_in">min</span>(tourPopDistances);</span><br><span class="line">        [parent2X,parent2Y] = <span class="built_in">find</span>(sumDistance==parent2,<span class="number">1</span>, <span class="string">&#x27;first&#x27;</span>);</span><br><span class="line">        parent2Path = pop(parent2X(<span class="number">1</span>,<span class="number">1</span>),:);</span><br><span class="line">        subPath = crossover(parent1Path, parent2Path, crossoverProbabilty);<span class="comment">%交叉</span></span><br><span class="line">        subPath = mutate(subPath, mutationProbabilty);<span class="comment">%变异</span></span><br><span class="line">        offspring(k,:) = subPath(<span class="number">1</span>,:);</span><br><span class="line">        minPathes(gen,<span class="number">1</span>) = minPath; </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    fprintf(<span class="string">&#x27;代数:%d   最短路径:%.2fKM \n&#x27;</span>, gen,minPath);</span><br><span class="line">    <span class="comment">% 更新</span></span><br><span class="line">    pop = offspring;</span><br><span class="line">    <span class="comment">% 画出当前状态下的最短路径</span></span><br><span class="line">    <span class="keyword">if</span> minPath &lt; gbest</span><br><span class="line">    gbest = minPath;</span><br><span class="line">    paint(cities, pop, gbest, sumDistance,gen);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">figure</span> </span><br><span class="line"><span class="built_in">plot</span>(minPathes, <span class="string">&#x27;MarkerFaceColor&#x27;</span>, <span class="string">&#x27;red&#x27;</span>,<span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">1</span>);</span><br><span class="line">title(<span class="string">&#x27;收敛曲线图（每一代的最短路径）&#x27;</span>);</span><br><span class="line">set(gca,<span class="string">&#x27;ytick&#x27;</span>,<span class="number">500</span>:<span class="number">100</span>:<span class="number">5000</span>); </span><br><span class="line">ylabel(<span class="string">&#x27;路径长度&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;迭代次数&#x27;</span>);</span><br><span class="line">grid on</span><br><span class="line">tEnd = toc(tStart);</span><br><span class="line">fprintf(<span class="string">&#x27;时间:%d 分  %f 秒.\n&#x27;</span>, <span class="built_in">floor</span>(tEnd/<span class="number">60</span>), <span class="built_in">rem</span>(tEnd,<span class="number">60</span>));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ fitnessvar, sumDistances,minPath, maxPath ]</span> = <span class="title">fitness</span><span class="params">( distances, pop )</span></span></span><br><span class="line"><span class="comment">% 计算整个种群的适应度值</span></span><br><span class="line"> </span><br><span class="line">    [popSize, col] = <span class="built_in">size</span>(pop);</span><br><span class="line">    sumDistances = <span class="built_in">zeros</span>(popSize,<span class="number">1</span>);</span><br><span class="line">    fitnessvar = <span class="built_in">zeros</span>(popSize,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:popSize</span><br><span class="line">       <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:col<span class="number">-1</span></span><br><span class="line">          sumDistances(<span class="built_in">i</span>) = sumDistances(<span class="built_in">i</span>) + distances(pop(<span class="built_in">i</span>,<span class="built_in">j</span>),pop(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>));</span><br><span class="line">       <span class="keyword">end</span> </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    minPath = <span class="built_in">min</span>(sumDistances);</span><br><span class="line">    maxPath = <span class="built_in">max</span>(sumDistances);</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">length</span>(sumDistances)</span><br><span class="line">        fitnessvar(<span class="built_in">i</span>,<span class="number">1</span>)=(maxPath - sumDistances(<span class="built_in">i</span>,<span class="number">1</span>)+<span class="number">0.000001</span>) / (maxPath-minPath+<span class="number">0.00000001</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ distances ]</span> = <span class="title">calculateDistance</span><span class="params">( city )</span></span></span><br><span class="line">    [~, col] = <span class="built_in">size</span>(city);</span><br><span class="line">    distances = <span class="built_in">zeros</span>(col);</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:col</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:col</span><br><span class="line">            distances(<span class="built_in">i</span>,<span class="built_in">j</span>)=distances(<span class="built_in">i</span>,<span class="built_in">j</span>)+ <span class="built_in">sqrt</span>((city(<span class="number">1</span>,<span class="built_in">i</span>)-city(<span class="number">1</span>,<span class="built_in">j</span>))^<span class="number">2</span>+(city(<span class="number">2</span>,<span class="built_in">i</span>)-city(<span class="number">2</span>,<span class="built_in">j</span>))^<span class="number">2</span>  );           </span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[childPath]</span> = <span class="title">crossover</span><span class="params">(parent1Path, parent2Path, prob)</span></span></span><br><span class="line">    random = <span class="built_in">rand</span>();</span><br><span class="line">    <span class="keyword">if</span> prob &gt;= random</span><br><span class="line">        [l, <span class="built_in">length</span>] = <span class="built_in">size</span>(parent1Path);</span><br><span class="line">        childPath = <span class="built_in">zeros</span>(l,<span class="built_in">length</span>);</span><br><span class="line">        setSize = <span class="built_in">floor</span>(<span class="built_in">length</span>/<span class="number">2</span>) <span class="number">-1</span>;</span><br><span class="line">        offset = randi(setSize);</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">i</span>=offset:setSize+offset<span class="number">-1</span></span><br><span class="line">            childPath(<span class="number">1</span>,<span class="built_in">i</span>) = parent1Path(<span class="number">1</span>,<span class="built_in">i</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        iterator = <span class="built_in">i</span>+<span class="number">1</span>;</span><br><span class="line">        <span class="built_in">j</span> = iterator;</span><br><span class="line">        <span class="keyword">while</span> any(childPath == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">j</span> &gt; <span class="built_in">length</span></span><br><span class="line">                <span class="built_in">j</span> = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line">            <span class="keyword">if</span> iterator &gt; <span class="built_in">length</span></span><br><span class="line">                iterator = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">if</span> ~any(childPath == parent2Path(<span class="number">1</span>,<span class="built_in">j</span>))</span><br><span class="line">                childPath(<span class="number">1</span>,iterator) = parent2Path(<span class="number">1</span>,<span class="built_in">j</span>);</span><br><span class="line">               iterator = iterator + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            <span class="built_in">j</span> = <span class="built_in">j</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        childPath = parent1Path;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ mutatedPath ]</span> = <span class="title">mutate</span><span class="params">( path, prob )</span></span></span><br><span class="line"><span class="comment">%对指定的路径利用指定的概率进行更新</span></span><br><span class="line">    random = <span class="built_in">rand</span>();</span><br><span class="line">    <span class="keyword">if</span> random &lt;= prob</span><br><span class="line">        [l,<span class="built_in">length</span>] = <span class="built_in">size</span>(path);</span><br><span class="line">        index1 = randi(<span class="built_in">length</span>);</span><br><span class="line">        index2 = randi(<span class="built_in">length</span>);</span><br><span class="line">        <span class="comment">%交换</span></span><br><span class="line">        temp = path(l,index1);</span><br><span class="line">        path(l,index1) = path(l,index2);</span><br><span class="line">        path(l,index2)=temp;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">        mutatedPath = path; </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>相比于纯随机算法而言，EA 算法明显的提高了效率，加快了优化的速度。在 Lab3 的作业中，使用 5/12/25/40 的城市数量进行测试。最终得到了答案。但由于当时没有记录时间，因此缺失一部分数据。可以记得的是，当 城市数量增加后，耗时明显增加，以至于最高只能测试 40 个城市的情况。 EA 算法中，收敛曲线表明了收敛的过程，随着城市数量的增加，收敛速度减缓。但依旧在 13 秒内，得到了 50 个城市的情况，24 秒得到了 100 个城市的情况（可能未达到最优）。在测试 200 城市的时候，使用了实验室 服务器，因此出现乱码；结果显示，耗时 212 分 33 秒，完成了对 200 城市情况的计算。</p>
+<img src="/2021/05/02/Nonlinear-Optimization-TSP/image-20210502150017090.png" alt="image-20210502150017090">
+
+<h2 id="Final-Report-Artificial-Bee-Colony-Algorithm-for-TSP"><a href="#Final-Report-Artificial-Bee-Colony-Algorithm-for-TSP" class="headerlink" title="Final Report: Artificial Bee Colony Algorithm for TSP"></a>Final Report: Artificial Bee Colony Algorithm for TSP</h2><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/wilsonxu7/wilsonxu7.github.io/612064182873116d689a44c93b6f558964281e40/download/Artificial%20Bee%20Colony%20Algorithm%20for%20TSP.pdf">下载报告</a><br><a target="_blank" rel="noopener" href="https://github.com/wilsonxu7/wilsonxu7.github.io/blob/master/download/Code_Artificial%20Bee%20Colony%20Algorithm%20for%20TSP.zip">ABC_for_TSP_代码下载</a></p>
+<p>Basic steps of the ABC algorithm are given below:</p>
+<img src="/2021/05/02/Nonlinear-Optimization-TSP/image-20210502151456421.png" alt="image-20210502151456421">
+
+<img src="/2021/05/02/Nonlinear-Optimization-TSP/image-20210502154843857.png" class title="image-20210502154843857">
+
+<img src="/2021/05/02/Nonlinear-Optimization-TSP/image-20210502154922385.png" class title="image-20210502154922385">
+
+<img src="/2021/05/02/Nonlinear-Optimization-TSP/image-20210502155104654.png" class title="image-20210502155104654">
+
+<img src="/2021/05/02/Nonlinear-Optimization-TSP/image-20210502155222840.png" class title="image-20210502155222840">
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Nonlinear-Optimization-TSP/" rel="tag"># Nonlinear_Optimization, TSP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/02/Nonlinear_Optimization%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E9%A2%98/" rel="prev" title="Nonlinear_Optimization的一些有意思的题">
+      <i class="fa fa-chevron-left"></i> Nonlinear_Optimization的一些有意思的题
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Travelling-Salesman-Problem"><span class="nav-number">1.</span> <span class="nav-text">Travelling Salesman Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%A8%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">笨方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GA%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">GA算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Final-Report-Artificial-Bee-Colony-Algorithm-for-TSP"><span class="nav-number">4.</span> <span class="nav-text">Final Report: Artificial Bee Colony Algorithm for TSP</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wilson Xu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">الوسوم</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wilson Xu</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
