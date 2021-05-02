@@ -194,7 +194,7 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="压缩感知-1"><a href="#压缩感知-1" class="headerlink" title="压缩感知"></a>压缩感知</h2><center><div class="img-item" data-src="压缩感知/image1.png" data-sub-html=".caption"><img src="压缩感知/image1.png" ></div>信号频谱</center>
+<h2 id="压缩感知-1"><a href="#压缩感知-1" class="headerlink" title="压缩感知"></a>压缩感知</h2><center><img src="/.com//image1.png">信号频谱</center>
 
 
 <ul>
@@ -211,7 +211,7 @@
 <li><p>于是最终方程就变成了：y=ΦΨs。已知y、Φ、Ψ，求解s。</p>
 </li>
 </ul>
-<center><div class="img-item" data-src="压缩感知/image2.png" data-sub-html=".caption"><img src="压缩感知/image2.png" ></div>信号频谱</center>
+<center><img src="/.com//image2.png">信号频谱</center>
 
 <ul>
 <li> y=ΦΨs有点长，我们把ΦΨ合并成一个矩阵，称之为传感矩阵。即令Θ=ΦΨ<br>，则y=ΘS。</li>
@@ -220,15 +220,15 @@
 </ul>
 <h2 id="前提条件2：不相关性（incoherence）"><a href="#前提条件2：不相关性（incoherence）" class="headerlink" title="前提条件2：不相关性（incoherence）"></a>前提条件2：不相关性（incoherence）</h2><table>
     <tr>
-        <td ><center><div class="img-item" data-src="压缩感知/image3.png" data-sub-html=".caption"><img src="压缩感知/image3.png" ></div> </center></td>
-        <td ><center><div class="img-item" data-src="压缩感知/image4.png" data-sub-html=".caption"><img src="压缩感知/image4.png" ></div> </center></td>
+        <td><center><img src="/.com//image3.png"> </center></td>
+        <td><center><img src="/.com//image4.png"> </center></td>
     </tr>
 </table>
 
 <ul>
 <li>陶哲轩和Candès大神证明了RIP才是观测矩阵要满足的准确要求。但是，要确认一个矩阵是否满足RIP非常复杂。于是Baraniuk证明：RIP的等价条件是观测矩阵和稀疏表示基不相关（incoherent）。 </li>
 </ul>
-<center><div class="img-item" data-src="压缩感知/image5.png" data-sub-html=".caption"><img src="压缩感知/image5.png" ></div>信号频谱</center>
+<center><img src="/.com//image5.png">信号频谱</center>
 
 <ul>
 <li><p>那怎样找到不相关的观测矩阵呢？陶哲轩和Candès又证明： <strong>独立同分布的高斯随机测量矩阵可以成为普适的压缩感知测量矩阵。</strong></p>
@@ -251,7 +251,7 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="算法理解"><a href="#算法理解" class="headerlink" title="算法理解"></a>算法理解</h2><center><div class="img-item" data-src="压缩感知/image6.png" data-sub-html=".caption"><img src="压缩感知/image6.png" ></div>信号频谱</center>
+<h2 id="算法理解"><a href="#算法理解" class="headerlink" title="算法理解"></a>算法理解</h2><center><img src="/.com//image6.png">信号频谱</center>
 
 <p>公式：<br>$$ y=\phi x $$</p>
 <ul>
@@ -295,15 +295,15 @@
 </ul>
 <p>$$M=O(K \log(N/K)) $$<br>$M$为测量矩阵$\phi$大小的选择。在这里如何取值，<strong>没有看明白。</strong></p>
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>针对于<br>$$ f=\cos{\frac{2\pi t}{256}} + \sin{\frac{2\pi t}{128}}$$<br>这一个信号，它的频谱为：</p>
-<center><div class="img-item" data-src="压缩感知/image7.png" data-sub-html=".caption"><img src="压缩感知/image7.png" ></div>信号频谱</center>
+<center><img src="/.com//image7.png">信号频谱</center>
 在频域上，可以认为这个信号稀疏，因此可以进行压缩感知。\
 代码如下:
 
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% 素质三连</span></span><br><span class="line">clc; clear all; close all</span><br><span class="line"><span class="comment">%% 初始化信号</span></span><br><span class="line">n = <span class="number">512</span>; <span class="comment">% Signal length</span></span><br><span class="line">s = <span class="number">2</span> ; <span class="comment">% Sparsity level</span></span><br><span class="line">m = <span class="number">40</span> ；<span class="comment">%1 + floor((s+1)*log10(n)); % Number of measurements</span></span><br><span class="line">fs=<span class="number">0.04</span>; <span class="comment">% 用于fft看频域%  t = [0:n-1]&#x27;/fs;</span></span><br><span class="line">t = [<span class="number">0</span>:n<span class="number">-1</span>]&#x27;;</span><br><span class="line">f = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>/<span class="number">256</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>/<span class="number">128</span>*t);</span><br><span class="line">fft_f=fft(f,n); <span class="comment">% 得到频域的稀疏信号</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% 多种传感矩阵</span></span><br><span class="line">A1 = get_A_random(n ,m);</span><br><span class="line">A2 = get_A_fourier(n ,m);</span><br><span class="line">A3 = PartHadamardMtx(n,m);</span><br><span class="line"></span><br><span class="line">A=A3; <span class="comment">% 选择一种传感矩阵</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% y=phi*x</span></span><br><span class="line">y =A*fft_f; <span class="comment">% Take the measurements</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Solve using CVX. 用CVX工具解优化</span></span><br><span class="line">cvx_begin</span><br><span class="line">    variable xp(n) <span class="built_in">complex</span>;</span><br><span class="line">    minimize(norm(xp,<span class="number">1</span>)) ;</span><br><span class="line">    subject to</span><br><span class="line">    A*xp == y </span><br><span class="line">cvx_end</span><br><span class="line"></span><br><span class="line">temp=norm(fft_f-xp)/norm(fft_f);</span><br><span class="line"><span class="comment">%% 逆傅里叶变换，回到时域</span></span><br><span class="line">ifft_signal=ifft(xp,n);</span><br><span class="line"> </span><br><span class="line"><span class="built_in">plot</span> ( f )</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line"><span class="comment">%subplot(2,1,2);</span></span><br><span class="line"><span class="built_in">plot</span> ( <span class="built_in">real</span>(ifft_signal) ,<span class="string">&#x27;r.&#x27;</span> ) <span class="comment">% 选取实部作图（虚部有极小的分量。）</span></span><br><span class="line"><span class="built_in">legend</span> ( <span class="string">&#x27; Original &#x27;</span> , <span class="string">&#x27; Recovered &#x27;</span> )</span><br></pre></td></tr></table></figure>
 <table>
     <tr>
-        <td ><center><div class="img-item" data-src="压缩感知/image8.png" data-sub-html=".caption"><img src="压缩感知/image8.png" ></div>时域信号 </center></td>
-        <td ><center><div class="img-item" data-src="压缩感知/image9.png" data-sub-html=".caption"><img src="压缩感知/image9.png" ></div>频域信号（代码需另写） </center></td>
+        <td><center><img src="/.com//image8.png">时域信号 </center></td>
+        <td><center><img src="/.com//image9.png">频域信号（代码需另写） </center></td>
     </tr>
 </table>
 
