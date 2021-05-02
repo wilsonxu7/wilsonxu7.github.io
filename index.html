@@ -81,7 +81,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="تشغيل شريط التصفح">
+    <div class="toggle" aria-label="Navigationsleiste an/ausschalten">
     </div>
   </div>
 
@@ -149,10 +149,10 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
-              <time title="أُنشأ: 2021-05-02 13:39:17 / عُدل: 15:44:34" itemprop="dateCreated datePublished" datetime="2021-05-02T13:39:17+08:00">2021-05-02</time>
+              <time title="Erstellt: 2021-05-02 13:39:17 / Geändert am: 15:52:44" itemprop="dateCreated datePublished" datetime="2021-05-02T13:39:17+08:00">2021-05-02</time>
             </span>
 
           
@@ -232,7 +232,7 @@
 
 
 <p>相比于纯随机算法而言，EA 算法明显的提高了效率，加快了优化的速度。在 Lab3 的作业中，使用 5/12/25/40 的城市数量进行测试。最终得到了答案。但由于当时没有记录时间，因此缺失一部分数据。可以记得的是，当 城市数量增加后，耗时明显增加，以至于最高只能测试 40 个城市的情况。 EA 算法中，收敛曲线表明了收敛的过程，随着城市数量的增加，收敛速度减缓。但依旧在 13 秒内，得到了 50 个城市的情况，24 秒得到了 100 个城市的情况（可能未达到最优）。在测试 200 城市的时候，使用了实验室 服务器，因此出现乱码；结果显示，耗时 212 分 33 秒，完成了对 200 城市情况的计算。</p>
-<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502150017090.png" alt="image-20210502150017090" style="zoom:67%;">
+<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502150017090.png" alt="image-20210502150017090">
 
 
 
@@ -242,7 +242,8 @@
 
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Course: Nonlinear Optimization. %</span></span><br><span class="line"><span class="comment">% FALL.2019. Dr. Cheng. %</span></span><br><span class="line"><span class="comment">% Assignment: 3 %</span></span><br><span class="line"><span class="comment">% Date:(2019.9.20) %</span></span><br><span class="line"><span class="comment">% By: (许维杰) % % %</span></span><br><span class="line"><span class="comment">% ID NUMBER: (11930535) %</span></span><br><span class="line"><span class="comment">% LAB:(3.3) %</span></span><br><span class="line"><span class="comment">% Description:%</span></span><br><span class="line"><span class="comment">% all inputs. %</span></span><br><span class="line"><span class="comment">%+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++%</span></span><br><span class="line">close all;</span><br><span class="line">clear all;</span><br><span class="line">clc;</span><br><span class="line">nums=<span class="number">25</span>;</span><br><span class="line"><span class="built_in">size</span>=randi(<span class="number">5</span>,nums,<span class="number">2</span>);<span class="comment">%第一列为宽，第二列高；</span></span><br><span class="line"></span><br><span class="line">width=<span class="number">12</span>;</span><br><span class="line">height=<span class="built_in">zeros</span>(<span class="number">1</span>,width);</span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">grid on;</span><br><span class="line">axis([<span class="number">0</span> <span class="number">12</span> <span class="number">0</span> <span class="number">24</span>]);</span><br><span class="line">set(gcf,<span class="string">&#x27;position&#x27;</span>,[<span class="number">800</span>,<span class="number">200</span>,<span class="number">400</span>,<span class="number">800</span>]);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">1</span>:nums  <span class="comment">%对所有箱子遍历</span></span><br><span class="line">    temp=<span class="built_in">zeros</span>(<span class="number">1</span>,width);</span><br><span class="line">    </span><br><span class="line">    temp(<span class="number">1</span>:<span class="number">1</span>+<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>)<span class="number">-1</span>)=<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">2</span>);</span><br><span class="line">    height_temp1=height+temp;</span><br><span class="line">    height_temp1(<span class="number">1</span>:<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>))=<span class="built_in">max</span>(height_temp1(<span class="number">1</span>:<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>)));</span><br><span class="line">    flag=<span class="number">0</span>; <span class="comment">%记录箱子放置的x的起始点</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">2</span>:width-<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>)+<span class="number">1</span> <span class="comment">%把箱子不旋转的情况下，从左到右平移</span></span><br><span class="line">        temp=<span class="built_in">zeros</span>(<span class="number">1</span>,width);</span><br><span class="line">        temp(<span class="built_in">j</span>:<span class="built_in">j</span>+<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>)<span class="number">-1</span>)=<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">2</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">%</span></span><br><span class="line">        height_temp2=height+temp;</span><br><span class="line">        <span class="comment">%横着放，要取最大值</span></span><br><span class="line">        height_temp2(<span class="built_in">j</span>:<span class="built_in">j</span>+<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>)<span class="number">-1</span>)=<span class="built_in">max</span>(height_temp2(<span class="built_in">j</span>:<span class="built_in">j</span>+<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>)<span class="number">-1</span>));</span><br><span class="line">        <span class="comment">%</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">max</span>(height_temp1(flag+<span class="number">1</span>:flag+<span class="number">1</span>+<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>)<span class="number">-1</span>))&gt;<span class="built_in">max</span>(height_temp2(<span class="built_in">j</span>:<span class="built_in">j</span>+<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>)<span class="number">-1</span>))</span><br><span class="line">            flag=<span class="built_in">j</span><span class="number">-1</span>;</span><br><span class="line">            height_temp1=height_temp2;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="comment">%画箱子</span></span><br><span class="line">    pause();</span><br><span class="line">    coordinate=[flag,<span class="built_in">max</span>(height(flag+<span class="number">1</span>:flag+<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>)));flag,height_temp1((flag+<span class="number">1</span>));flag+<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>),height_temp1(flag+<span class="number">1</span>);flag+<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>),<span class="built_in">max</span>(height(flag+<span class="number">1</span>:flag+<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>)))];</span><br><span class="line">    fill(coordinate(:,<span class="number">1</span>),coordinate(:,<span class="number">2</span>),<span class="string">&#x27;y&#x27;</span>);</span><br><span class="line">    text(flag+<span class="number">0.5</span>,<span class="number">0.5</span>+<span class="built_in">max</span>(height(flag+<span class="number">1</span>:flag+<span class="built_in">size</span>(<span class="built_in">i</span>,<span class="number">1</span>))),&#123;<span class="built_in">i</span>&#125;);</span><br><span class="line">    <span class="comment">%画箱子</span></span><br><span class="line">    height=height_temp1;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502145217431.png" alt="image-20210502145217431" style="zoom:75%;"><img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502145226576.png" alt="image-20210502145226576" style="zoom:75%;"></p>
+<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502154702292.png" class title="image-20210502154702292">
+
 <h2 id="Exercise-Descent-Method-with-Trust-Region"><a href="#Exercise-Descent-Method-with-Trust-Region" class="headerlink" title="Exercise: Descent Method with Trust Region"></a>Exercise: Descent Method with Trust Region</h2><p>Implement a descent method with trust region that uses a first-order model of the  objective function. The model should be obtained by estimating the objective  function gradient using finite differences. The model can be optimized using any  available method (e.g., golden ratio search)</p>
 <p>Test your function using:</p>
 <ol>
@@ -278,21 +279,13 @@
 <p>Basic steps of the ABC algorithm are given below:</p>
 <img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502151456421.png" alt="image-20210502151456421">
 
-<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502152135054.png" alt="image-20210502152135054">
+<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502154843857.png" class title="image-20210502154843857">
 
-<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502152202228.png" alt="image-20210502152202228">
+<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502154922385.png" class title="image-20210502154922385">
 
-<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502152314581.png" alt="image-20210502152314581">
+<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502155104654.png" class title="image-20210502155104654">
 
-<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502152345494.png" alt="image-20210502152345494">
-
-
-
-<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502152357805.png" alt="image-20210502152357805">
-
-<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502152406778.png" alt="image-20210502152406778">
-
-<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502152503023.png" class title="image-20210502152503023">
+<img src="/2021/05/02/%E9%AB%98%E7%BA%A7%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/image-20210502155222840.png" class title="image-20210502155222840">
 
 
 
@@ -357,16 +350,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
 
-              <time title="أُنشأ: 2020-06-20 15:16:13" itemprop="dateCreated datePublished" datetime="2020-06-20T15:16:13+08:00">2020-06-20</time>
+              <time title="Erstellt: 2020-06-20 15:16:13" itemprop="dateCreated datePublished" datetime="2020-06-20T15:16:13+08:00">2020-06-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
-                <span class="post-meta-item-text">عُدل في</span>
-                <time title="عُدل: 2021-05-02 14:02:53" itemprop="dateModified" datetime="2021-05-02T14:02:53+08:00">2021-05-02</time>
+                <span class="post-meta-item-text">Bearbeitet am</span>
+                <time title="Geändert am: 2021-05-02 14:02:53" itemprop="dateModified" datetime="2021-05-02T14:02:53+08:00">2021-05-02</time>
               </span>
 
           
@@ -470,16 +463,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
 
-              <time title="أُنشأ: 2020-06-17 15:16:13" itemprop="dateCreated datePublished" datetime="2020-06-17T15:16:13+08:00">2020-06-17</time>
+              <time title="Erstellt: 2020-06-17 15:16:13" itemprop="dateCreated datePublished" datetime="2020-06-17T15:16:13+08:00">2020-06-17</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
-                <span class="post-meta-item-text">عُدل في</span>
-                <time title="عُدل: 2021-04-30 18:48:26" itemprop="dateModified" datetime="2021-04-30T18:48:26+08:00">2021-04-30</time>
+                <span class="post-meta-item-text">Bearbeitet am</span>
+                <time title="Geändert am: 2021-04-30 18:48:26" itemprop="dateModified" datetime="2021-04-30T18:48:26+08:00">2021-04-30</time>
               </span>
 
           
@@ -693,10 +686,10 @@
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          المحتويات
+          Inhaltsverzeichnis
         </li>
         <li class="sidebar-nav-overview">
-          عام
+          Übersicht
         </li>
       </ul>
 
@@ -715,8 +708,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives">
           <span class="site-state-item-count">3</span>
-          <span class="site-state-item-name">المقالات</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">schlagwörter</span>
       </div>
   </nav>
 </div>
@@ -748,7 +745,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Wilson Xu</span>
 </div>
-  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
         
