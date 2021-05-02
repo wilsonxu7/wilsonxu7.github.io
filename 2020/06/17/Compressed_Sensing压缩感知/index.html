@@ -37,8 +37,9 @@
 <meta property="og:image" content="http://example.com/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image8.png">
 <meta property="og:image" content="http://example.com/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image9.png">
 <meta property="article:published_time" content="2020-06-17T07:16:13.000Z">
-<meta property="article:modified_time" content="2021-05-02T08:15:44.562Z">
+<meta property="article:modified_time" content="2021-05-02T08:50:05.710Z">
 <meta property="article:author" content="Wilson Xu">
+<meta property="article:tag" content="Compressed_Sensing">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image1.png">
 
@@ -172,7 +173,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">عُدل في</span>
-                <time title="عُدل: 2021-05-02 16:15:44" itemprop="dateModified" datetime="2021-05-02T16:15:44+08:00">2021-05-02</time>
+                <time title="عُدل: 2021-05-02 16:50:05" itemprop="dateModified" datetime="2021-05-02T16:50:05+08:00">2021-05-02</time>
               </span>
 
           
@@ -201,7 +202,7 @@
 </li>
 <li><p>对于之前讲的例子，如果它在频域中不稀疏，我们可以做DWT、DCT等，找到它的稀疏变换。</p>
 <blockquote>
-<p>DWT （Discrete Wavelet Transformation） 离散小波变换<br>DCT （Discrete Cosine Transform） 离散余弦变换\</p>
+<p>DWT （Discrete Wavelet Transformation） 离散小波变换<br>DCT （Discrete Cosine Transform） 离散余弦变换</p>
 </blockquote>
 <blockquote>
 <p>稀疏性普遍用作图像压缩，eg.JPEG<br>将图像的数据转到稀疏的域，留下主成分，将其余置零。</p>
@@ -214,29 +215,29 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="压缩感知"><a href="#压缩感知" class="headerlink" title="压缩感知"></a>压缩感知</h2><center><img src="/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image1.png">信号频谱</center>
+<h2 id="压缩感知"><a href="#压缩感知" class="headerlink" title="压缩感知"></a>压缩感知</h2><center><img src="/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image1.png"></center>
 
 
 <ul>
-<li><p>如图，x是为长度N的一维信号，也就是原信号，稀疏度为k。此刻它是未知的。</p>
+<li><p>如图，$x$是为长度$N$的一维信号，也就是原信号，稀疏度为$k$。此刻它是未知的。</p>
 </li>
-<li><p>Φ为观测矩阵，对应着亚采样这一过程。它将高维信号x投影到低维空间，是已知的。</p>
+<li><p>$Φ$为观测矩阵，对应着亚采样这一过程。它将高维信号$x$投影到低维空间，是已知的。</p>
 </li>
-<li><p>y=Φx为长度M的一维测量值，也就是亚采样后的结果。显然它也是已知的。</p>
+<li><p>$y=Φx$为长度M的一维测量值，也就是亚采样后的结果。显然它也是已知的。</p>
 </li>
-<li><p>因此，压缩感知问题就是在已知测量值y和测量矩阵Φ的基础上，求解欠定方程组y=Φx得到原信号x。</p>
+<li><p>因此，压缩感知问题就是在已知测量值y和测量矩阵Φ的基础上，求解欠定方程组$y=Φx$得到原信号$x$。</p>
 </li>
-<li><p>然而，一般的自然信号x本身并不是稀疏的，需要在某种稀疏基上进行稀疏表示。令x=Ψs，Ψ为稀疏基矩阵，s为稀疏系数。</p>
+<li><p>然而，一般的自然信号x本身并不是稀疏的，需要在某种稀疏基上进行稀疏表示。令$x=Ψs$，$Ψ$为稀疏基矩阵，$s$为稀疏系数。</p>
 </li>
-<li><p>于是最终方程就变成了：y=ΦΨs。已知y、Φ、Ψ，求解s。</p>
+<li><p>于是最终方程就变成了：$y=ΦΨs$。已知$y$、$Φ$、$Ψ$，求解$s$。</p>
 </li>
 </ul>
-<center><img src="/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image2.png">信号频谱</center>
+<center><img src="/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image2.png"></center>
 
 <ul>
-<li> y=ΦΨs有点长，我们把ΦΨ合并成一个矩阵，称之为传感矩阵。即令Θ=ΦΨ<br>，则y=ΘS。</li>
-<li>问题即为，已知y和Θ，求解S。求解出S后，由x=Ψs即可得到恢复出的原信号x。</li>
-<li>然而在正常情况下，方程的个数远小于未知数的个数，方程是没有确定解的，无法重构信号。但是，由于信号是K稀疏，如果上式中的Φ满足有限等距性质(RIP)，则K个系数就能够从M个测量值准确重构（得到一个最优解）。</li>
+<li> $y=ΦΨs$有点长，我们把$ΦΨ$合并成一个矩阵，称之为传感矩阵。即令$Θ=ΦΨ$，则$y=ΘS$。</li>
+<li> 问题即为，已知$y$和$Θ$，求解$S$。求解出$S$后，由$x=Ψs$即可得到恢复出的原信号$x$。</li>
+<li>然而在正常情况下，方程的个数远小于未知数的个数，方程是没有确定解的，无法重构信号。但是，由于信号是$K$稀疏，如果上式中的$Φ$满足有限等距性质(RIP)，则$K$个系数就能够从$M$个测量值准确重构（得到一个最优解）。</li>
 </ul>
 <h2 id="前提条件2：不相关性（incoherence）"><a href="#前提条件2：不相关性（incoherence）" class="headerlink" title="前提条件2：不相关性（incoherence）"></a>前提条件2：不相关性（incoherence）</h2><table>
     <tr>
@@ -245,10 +246,11 @@
     </tr>
 </table>
 
+
 <ul>
 <li>陶哲轩和Candès大神证明了RIP才是观测矩阵要满足的准确要求。但是，要确认一个矩阵是否满足RIP非常复杂。于是Baraniuk证明：RIP的等价条件是观测矩阵和稀疏表示基不相关（incoherent）。 </li>
 </ul>
-<center><img src="/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image5.png">信号频谱</center>
+<center><img src="/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image5.png"></center>
 
 <ul>
 <li><p>那怎样找到不相关的观测矩阵呢？陶哲轩和Candès又证明： <strong>独立同分布的高斯随机测量矩阵可以成为普适的压缩感知测量矩阵。</strong></p>
@@ -271,7 +273,7 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="算法理解"><a href="#算法理解" class="headerlink" title="算法理解"></a>算法理解</h2><center><img src="/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image6.png">信号频谱</center>
+<h2 id="算法理解"><a href="#算法理解" class="headerlink" title="算法理解"></a>算法理解</h2><center><img src="/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image6.png"></center>
 
 <p>公式：<br>$$ y=\phi x $$</p>
 <ul>
@@ -286,8 +288,7 @@
 <li><details>
   <summary>(1) 随机高斯测量矩阵</summary>
 
-  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ Phi ]</span> = <span class="title">GaussMtx</span><span class="params">( M,N )</span></span></span><br><span class="line"><span class="comment">%GaussMtx Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Generate Bernoulli matrix </span></span><br><span class="line"><span class="comment">%   M -- RowNumber</span></span><br><span class="line"><span class="comment">%   N -- ColumnNumber</span></span><br><span class="line"><span class="comment">%   Phi -- The Gauss matrix</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">%% Generate Gauss matrix   </span></span><br><span class="line">    Phi = <span class="built_in">randn</span>(M,N);</span><br><span class="line">    <span class="comment">%Phi = Phi/sqrt(M);</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-</details></li>
+  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ Phi ]</span> = <span class="title">GaussMtx</span><span class="params">( M,N )</span></span></span><br><span class="line"><span class="comment">%GaussMtx Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Generate Bernoulli matrix </span></span><br><span class="line"><span class="comment">%   M -- RowNumber</span></span><br><span class="line"><span class="comment">%   N -- ColumnNumber</span></span><br><span class="line"><span class="comment">%   Phi -- The Gauss matrix</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Generate Gauss matrix   </span></span><br><span class="line">    Phi = <span class="built_in">randn</span>(M,N);</span><br><span class="line">    <span class="comment">%Phi = Phi/sqrt(M);</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></details></li>
 <li><details>
   <summary>(2) 随机贝努力测量矩阵</summary>
 
@@ -296,17 +297,17 @@
 <li><details>
   <summary>(3) 部分哈达玛测量矩阵</summary>
 
-  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ Phi ]</span> = <span class="title">PartHadamardMtx</span><span class="params">( M,N )</span></span></span><br><span class="line"><span class="comment">%PartHadamardMtx Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Generate part Hadamard matrix </span></span><br><span class="line"><span class="comment">%   M -- RowNumber</span></span><br><span class="line"><span class="comment">%   N -- ColumnNumber</span></span><br><span class="line"><span class="comment">%   Phi -- The part Hadamard matrix</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">%% parameter initialization</span></span><br><span class="line"><span class="comment">%Because the MATLAB function hadamard handles only the cases where n, n/12,</span></span><br><span class="line"><span class="comment">%or n/20 is a power of 2</span></span><br><span class="line">    L_t = <span class="built_in">max</span>(M,N);<span class="comment">%Maybe L_t does not meet requirement of function hadamard</span></span><br><span class="line">    L_t1 = (<span class="number">12</span> - <span class="built_in">mod</span>(L_t,<span class="number">12</span>)) + L_t;</span><br><span class="line">    L_t2 = (<span class="number">20</span> - <span class="built_in">mod</span>(L_t,<span class="number">20</span>)) + L_t; </span><br><span class="line">    L_t3 = <span class="number">2</span>^<span class="built_in">ceil</span>(<span class="built_in">log2</span>(L_t));</span><br><span class="line">    L = <span class="built_in">min</span>([L_t1,L_t2,L_t3]);<span class="comment">%Get the minimum L</span></span><br><span class="line"><span class="comment">%% Generate part Hadamard matrix   </span></span><br><span class="line">    Phi = [];</span><br><span class="line">    Phi_t = <span class="built_in">hadamard</span>(L);</span><br><span class="line">    RowIndex = randperm(L);</span><br><span class="line">    Phi_t_r = Phi_t(RowIndex(<span class="number">1</span>:M),:);</span><br><span class="line">    ColIndex = randperm(L);</span><br><span class="line">    Phi = Phi_t_r(:,ColIndex(<span class="number">1</span>:N));</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ Phi ]</span> = <span class="title">PartHadamardMtx</span><span class="params">( M,N )</span></span></span><br><span class="line"><span class="comment">%PartHadamardMtx Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Generate part Hadamard matrix </span></span><br><span class="line"><span class="comment">%   M -- RowNumber</span></span><br><span class="line"><span class="comment">%   N -- ColumnNumber</span></span><br><span class="line"><span class="comment">%   Phi -- The part Hadamard matrix</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% parameter initialization</span></span><br><span class="line"><span class="comment">%Because the MATLAB function hadamard handles only the cases where n, n/12,</span></span><br><span class="line"><span class="comment">%or n/20 is a power of 2</span></span><br><span class="line">    L_t = <span class="built_in">max</span>(M,N);<span class="comment">%Maybe L_t does not meet requirement of function hadamard</span></span><br><span class="line">    L_t1 = (<span class="number">12</span> - <span class="built_in">mod</span>(L_t,<span class="number">12</span>)) + L_t;</span><br><span class="line">    L_t2 = (<span class="number">20</span> - <span class="built_in">mod</span>(L_t,<span class="number">20</span>)) + L_t; </span><br><span class="line">    L_t3 = <span class="number">2</span>^<span class="built_in">ceil</span>(<span class="built_in">log2</span>(L_t));</span><br><span class="line">    L = <span class="built_in">min</span>([L_t1,L_t2,L_t3]);<span class="comment">%Get the minimum L</span></span><br><span class="line"><span class="comment">%% Generate part Hadamard matrix   </span></span><br><span class="line">    Phi = [];</span><br><span class="line">    Phi_t = <span class="built_in">hadamard</span>(L);</span><br><span class="line">    RowIndex = randperm(L);</span><br><span class="line">    Phi_t_r = Phi_t(RowIndex(<span class="number">1</span>:M),:);</span><br><span class="line">    ColIndex = randperm(L);</span><br><span class="line">    Phi = Phi_t_r(:,ColIndex(<span class="number">1</span>:N));</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 </details></li>
 <li><details>
   <summary>(4) 部分傅里叶测量矩阵</summary>
   
-  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ Phi ]</span> = <span class="title">PartFourierMtx</span><span class="params">( M,N )</span></span></span><br><span class="line"><span class="comment">%PartFourierMtx Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Generate part Fourier matrix </span></span><br><span class="line"><span class="comment">%   M -- RowNumber</span></span><br><span class="line"><span class="comment">%   N -- ColumnNumber</span></span><br><span class="line"><span class="comment">%   Phi -- The part Fourier matrix</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">%% Generate part Fourier matrix   </span></span><br><span class="line">    Phi_t = fft(<span class="built_in">eye</span>(N,N))/<span class="built_in">sqrt</span>(N);<span class="comment">%Fourier matrix</span></span><br><span class="line">    RowIndex = randperm(N);</span><br><span class="line">    Phi = Phi_t(RowIndex(<span class="number">1</span>:M),:);<span class="comment">%Select M rows randomly</span></span><br><span class="line">    <span class="comment">%normalization</span></span><br><span class="line">    <span class="keyword">for</span> ii = <span class="number">1</span>:N</span><br><span class="line">        Phi(:,ii) = Phi(:,ii)/norm(Phi(:,ii));</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ Phi ]</span> = <span class="title">PartFourierMtx</span><span class="params">( M,N )</span></span></span><br><span class="line"><span class="comment">%PartFourierMtx Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Generate part Fourier matrix </span></span><br><span class="line"><span class="comment">%   M -- RowNumber</span></span><br><span class="line"><span class="comment">%   N -- ColumnNumber</span></span><br><span class="line"><span class="comment">%   Phi -- The part Fourier matrix</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Generate part Fourier matrix   </span></span><br><span class="line">    Phi_t = fft(<span class="built_in">eye</span>(N,N))/<span class="built_in">sqrt</span>(N);<span class="comment">%Fourier matrix</span></span><br><span class="line">    RowIndex = randperm(N);</span><br><span class="line">    Phi = Phi_t(RowIndex(<span class="number">1</span>:M),:);<span class="comment">%Select M rows randomly</span></span><br><span class="line">    <span class="comment">%normalization</span></span><br><span class="line">    <span class="keyword">for</span> ii = <span class="number">1</span>:N</span><br><span class="line">        Phi(:,ii) = Phi(:,ii)/norm(Phi(:,ii));</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 </details></li>
 <li><details>
   <summary>(5) 稀疏随机测量矩阵</summary>
 
-  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ Phi ]</span> = <span class="title">SparseRandomMtx</span><span class="params">( M,N,d )</span></span></span><br><span class="line"><span class="comment">%SparseRandomMtx Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Generate SparseRandom matrix </span></span><br><span class="line"><span class="comment">%   M -- RowNumber</span></span><br><span class="line"><span class="comment">%   N -- ColumnNumber</span></span><br><span class="line"><span class="comment">%   d -- The number of &#x27;1&#x27; in every column,d&lt;M </span></span><br><span class="line"><span class="comment">%   Phi -- The SparseRandom matrix</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">%% Generate SparseRandom matrix   </span></span><br><span class="line">    Phi = <span class="built_in">zeros</span>(M,N);</span><br><span class="line">    <span class="keyword">for</span> ii = <span class="number">1</span>:N</span><br><span class="line">        ColIdx = randperm(M);</span><br><span class="line">        Phi(ColIdx(<span class="number">1</span>:d),ii) = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ Phi ]</span> = <span class="title">SparseRandomMtx</span><span class="params">( M,N,d )</span></span></span><br><span class="line"><span class="comment">%SparseRandomMtx Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Generate SparseRandom matrix </span></span><br><span class="line"><span class="comment">%   M -- RowNumber</span></span><br><span class="line"><span class="comment">%   N -- ColumnNumber</span></span><br><span class="line"><span class="comment">%   d -- The number of &#x27;1&#x27; in every column,d&lt;M </span></span><br><span class="line"><span class="comment">%   Phi -- The SparseRandom matrix</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Generate SparseRandom matrix   </span></span><br><span class="line">    Phi = <span class="built_in">zeros</span>(M,N);</span><br><span class="line">    <span class="keyword">for</span> ii = <span class="number">1</span>:N</span><br><span class="line">        ColIdx = randperm(M);</span><br><span class="line">        Phi(ColIdx(<span class="number">1</span>:d),ii) = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 </details></li>
 </ul>
 <ul>
@@ -315,10 +316,9 @@
 </ul>
 <p>$$M=O(K \log(N/K)) $$<br>$M$为测量矩阵$\phi$大小的选择。在这里如何取值，<strong>没有看明白。</strong></p>
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>针对于<br>$$ f=\cos{\frac{2\pi t}{256}} + \sin{\frac{2\pi t}{128}}$$<br>这一个信号，它的频谱为：</p>
-<center><img src="/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image7.png">信号频谱</center>
-在频域上，可以认为这个信号稀疏，因此可以进行压缩感知。\
-代码如下:
+<center><img src="/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image7.png"> </center>
 
+<p>在频域上，可以认为这个信号稀疏，因此可以进行压缩感知。<br>代码如下:</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% 素质三连</span></span><br><span class="line">clc; clear all; close all</span><br><span class="line"><span class="comment">%% 初始化信号</span></span><br><span class="line">n = <span class="number">512</span>; <span class="comment">% Signal length</span></span><br><span class="line">s = <span class="number">2</span> ; <span class="comment">% Sparsity level</span></span><br><span class="line">m = <span class="number">40</span> ；<span class="comment">%1 + floor((s+1)*log10(n)); % Number of measurements</span></span><br><span class="line">fs=<span class="number">0.04</span>; <span class="comment">% 用于fft看频域%  t = [0:n-1]&#x27;/fs;</span></span><br><span class="line">t = [<span class="number">0</span>:n<span class="number">-1</span>]&#x27;;</span><br><span class="line">f = <span class="built_in">cos</span>(<span class="number">2</span>*<span class="built_in">pi</span>/<span class="number">256</span>*t) + <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>/<span class="number">128</span>*t);</span><br><span class="line">fft_f=fft(f,n); <span class="comment">% 得到频域的稀疏信号</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% 多种传感矩阵</span></span><br><span class="line">A1 = get_A_random(n ,m);</span><br><span class="line">A2 = get_A_fourier(n ,m);</span><br><span class="line">A3 = PartHadamardMtx(n,m);</span><br><span class="line"></span><br><span class="line">A=A3; <span class="comment">% 选择一种传感矩阵</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% y=phi*x</span></span><br><span class="line">y =A*fft_f; <span class="comment">% Take the measurements</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Solve using CVX. 用CVX工具解优化</span></span><br><span class="line">cvx_begin</span><br><span class="line">    variable xp(n) <span class="built_in">complex</span>;</span><br><span class="line">    minimize(norm(xp,<span class="number">1</span>)) ;</span><br><span class="line">    subject to</span><br><span class="line">    A*xp == y </span><br><span class="line">cvx_end</span><br><span class="line"></span><br><span class="line">temp=norm(fft_f-xp)/norm(fft_f);</span><br><span class="line"><span class="comment">%% 逆傅里叶变换，回到时域</span></span><br><span class="line">ifft_signal=ifft(xp,n);</span><br><span class="line"> </span><br><span class="line"><span class="built_in">plot</span> ( f )</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line"><span class="comment">%subplot(2,1,2);</span></span><br><span class="line"><span class="built_in">plot</span> ( <span class="built_in">real</span>(ifft_signal) ,<span class="string">&#x27;r.&#x27;</span> ) <span class="comment">% 选取实部作图（虚部有极小的分量。）</span></span><br><span class="line"><span class="built_in">legend</span> ( <span class="string">&#x27; Original &#x27;</span> , <span class="string">&#x27; Recovered &#x27;</span> )</span><br></pre></td></tr></table></figure>
 <table>
     <tr>
@@ -326,8 +326,6 @@
         <td><center><img src="/2020/06/17/Compressed_Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/image9.png">频域信号（代码需另写） </center></td>
     </tr>
 </table>
-
-<h1 id="接下来将更新一些关于硬件上的压缩感知实现。"><a href="#接下来将更新一些关于硬件上的压缩感知实现。" class="headerlink" title="接下来将更新一些关于硬件上的压缩感知实现。"></a>接下来将更新一些关于硬件上的压缩感知实现。</h1>
     </div>
 
     
@@ -335,6 +333,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Compressed-Sensing/" rel="tag"># Compressed_Sensing</a>
+          </div>
 
         
 
@@ -343,8 +344,8 @@
     <div class="post-nav">
       <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/06/20/Speckle_Images%E6%95%A3%E6%96%91%E5%9B%BE%E5%83%8F%E6%AF%94%E5%AF%B9/" rel="next" title="Speckle_Images散斑图像比对">
-      Speckle_Images散斑图像比对 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/06/20/Speckle_Images%E6%95%A3%E6%96%91%E5%9B%BE%E5%83%8F%E6%AF%94%E5%AF%B9/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -404,7 +405,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Compressed-Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5"><span class="nav-number">1.</span> <span class="nav-text">Compressed_Sensing压缩感知</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B61%EF%BC%9A%E7%A8%80%E7%96%8F%E6%80%A7%EF%BC%88sparsity%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">前提条件1：稀疏性（sparsity）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5"><span class="nav-number">1.2.</span> <span class="nav-text">压缩感知</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B62%EF%BC%9A%E4%B8%8D%E7%9B%B8%E5%85%B3%E6%80%A7%EF%BC%88incoherence%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">前提条件2：不相关性（incoherence）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E6%8B%AC%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">概括总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3"><span class="nav-number">1.5.</span> <span class="nav-text">算法理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.6.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A5%E4%B8%8B%E6%9D%A5%E5%B0%86%E6%9B%B4%E6%96%B0%E4%B8%80%E4%BA%9B%E5%85%B3%E4%BA%8E%E7%A1%AC%E4%BB%B6%E4%B8%8A%E7%9A%84%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5%E5%AE%9E%E7%8E%B0%E3%80%82"><span class="nav-number">2.</span> <span class="nav-text">接下来将更新一些关于硬件上的压缩感知实现。</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Compressed-Sensing%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5"><span class="nav-number">1.</span> <span class="nav-text">Compressed_Sensing压缩感知</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B61%EF%BC%9A%E7%A8%80%E7%96%8F%E6%80%A7%EF%BC%88sparsity%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">前提条件1：稀疏性（sparsity）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5"><span class="nav-number">1.2.</span> <span class="nav-text">压缩感知</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B62%EF%BC%9A%E4%B8%8D%E7%9B%B8%E5%85%B3%E6%80%A7%EF%BC%88incoherence%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">前提条件2：不相关性（incoherence）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E6%8B%AC%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">概括总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3"><span class="nav-number">1.5.</span> <span class="nav-text">算法理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.6.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -422,7 +423,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">الوسوم</span>
       </div>
   </nav>
